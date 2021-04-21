@@ -1,0 +1,72 @@
+\documentclass[a4paper]{report}
+\usepackage{amsmath} %pour tous les trucs de math
+\usepackage{systeme} %pour tous les systemes d'équations
+%\usepackage{ bbold }  %pour toutes les doubles lettres
+\usepackage{amssymb}  %pour les double Lettres
+\usepackage{IEEEtrantools} %pour les équations en collonnes
+\usepackage{amsthm} %pour les preuves
+%\usepackage[french]{babel} %pour...
+%\selectlanguage{french}
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc} %...le français
+\usepackage{fancyhdr} %pour les entêtes et pied de page
+%\usepackage[math]{blindtext} % pour le Lorem ipsum
+%\usepackage{enumitem} %pour changer les listes
+\usepackage[a4paper,textwidth=15.5cm]{geometry}
+%\usepackage[framed,numbered]{mcode} %MatLab
+\usepackage{graphicx} % pour les graphiques
+%\usepackage{subfig} % pour les doubles figures
+\usepackage{float} % pour bien positionner les figures
+\usepackage{prettyref}
+\usepackage[hidelinks]{hyperref} % pour les hyperliens et références(mettre en dernier)
+
+\newrefformat{fig}{Figure~[\ref{#1}]}
+\newrefformat{it}{question~\ref{#1}.}
+\newrefformat{eq}{(\ref{#1})}
+\newrefformat{seq}{Section \ref{#1}}
+
+\newtheorem{theoreme}{Theorem} %[section]
+\newtheorem{corollaire}{Corollary} %[theorem]
+\newtheorem{lemme}{Lemma} %[theorem]
+\theoremstyle{definition}
+    \newtheorem{definition}{Definition} %[section]
+\theoremstyle{remark}
+     \newtheorem*{remarque}{Remark}
+
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\newcommand{\g}{\gamma}
+\renewcommand{\d}{\delta}
+\newcommand{\m}{\mu}
+\newcommand{\n}{\nu}
+\renewcommand{\P}{\Phi}
+\newcommand{\dotx}{\dot{x}}
+\newcommand{\bdotx}{\dot{\mathbf{x}}}
+\newcommand{\doty}{\dot{y}}
+\newcommand{\dotB}{\dot{B}}
+\newcommand{\dotP}{\dot{\P}}
+\newcommand{\Bstar}{B_{**}}
+\newcommand{\Pstar}{\P_{**}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dd}{\mathrm{d}}
+
+\pagestyle{fancy}
+\rhead{Chapter \thechapter}
+\lhead{*Lotka–Volterra Equations*}
+\chead{}
+
+\begin{document}
+
+\title{*Lotka–Volterra Equations*}
+\author{Benoît Müller}
+\date{}
+\maketitle
+
+
+\tableofcontents
+\include{chapitre1}
+\include{chapitre2}
+\include{chapitre3}
+    
+
+\end{document}
