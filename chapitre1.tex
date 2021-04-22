@@ -1,5 +1,5 @@
 \chapter{premier}
-The classic model of Lokta-Voltera equations is 
+The classic model of Lokta-Volterra equations is 
 \[\dot{x}=x(\a-\b y) \quad  \dot{y} = y(-\g + \d x)\]
 where $x$ and $y$ reprensent the size of the population of preys, and predators respectively. The parameters $\a,\b,\g,\d$ are positive scalars. We present a motivation behind this modelisation by showing how we can arrive to this choice of equation:
 
@@ -36,10 +36,10 @@ Now we want to introduce a second specie, the predator which alter the growth of
 \[ \dotx = x(\a -\b y).\]
 In the opposite, the growth rate of the predator increase together with the population. But it decrease without them :
 \[ \doty = x(-\g +\d x).\]
-This is the Lokta-Voltera equations for a prey-predator system.
+This is the Lokta-Volterra equations for a prey-predator system.
 
 \section{*Le papier sur les phages marins*}
-The idea is that we want to be able to modify the way the size of the species affect the rate. Traditional Lokta-Voltera equation consider the rate of growth as linear in the species. We use then functions $F$ and $G$ that are strictly monotonic,hence bijective, and increase from $0$ to $\infty$ to replace the linearity:
+The idea is that we want to be able to modify the way the size of the species affect the rate. Traditional Lokta-Volterra equation consider the rate of growth as linear in the species. We use then functions $F$ and $G$ that are strictly monotonic,hence bijective, and increase from $0$ to $\infty$ to replace the linearity:
 \begin{equation} \label{eq:LV}
     \begin{cases}
     \dotB = F(B)(\a -\b G(\P)) \\
@@ -49,35 +49,35 @@ The idea is that we want to be able to modify the way the size of the species af
 Here again, $\a,\b,\g,\d$ are positive scalars.
 \\ \\
 We search for non trivial equilibrium where $\dotB=\dotP=0$ :
-\[ (B_* = (F^{-1}(\a/\b) \quad \P_* = G^{-1}(\g/\d) ) \]
+\[ B_* = F^{-1}(\g/\d) \quad \P_* = G^{-1}(\a/\b)\]
 This let us rewrite \prettyref{eq:LV} using this notation :
 \begin{equation} \label{eq:LV*}
     \begin{cases}
-    \dotB = \b F(B)(F(B_*) - G(\P)) \\
-    \dotP = \d G(\P)(-G(\P_*) + F(B))
+    \dotB = \b F(B)(G(\P_*) - G(\P)) \\
+    \dotP = \d G(\P)(-F(B_*) + F(B))
     \end{cases}
 \end{equation}
 Now we can study the sign of the derivatives $\dotB$ and $\dotP$ and draw a phase plane. The positive values $B_*$ and $\P_*$ divide the positive plane $\R_+^2$ in four regions.
 [phase plane]
 Trajectories seem to turn around the center of equilibrium and we search for a first integral by taking the cross product of \prettyref{eq:LV*} and dividing by $F(B)G(\P)$ :
 \begin{IEEEeqnarray*}{rCl} 
-    0 &=& \big(\dotB \d G(\P)(-G(\P_*) + F(B))
-        - \dotP \b F(B)(F(B_*) - G(\P)) \big) \frac{1}{F(B)G(\P)} 
+    0 &=& \big(\dotB \d G(\P)(-F(B_*) + F(B))
+        - \dotP \b F(B)(G(\P_*) - G(\P)) \big) \frac{1}{F(B)G(\P)} 
         \IEEEyesnumber \label{eq:1integral} \\
-    &=& \d(-\frac{\dotB}{F(B)}G(\P_*) + \dotB)
-    -  \b(\frac{\dotP}{G(\P)}F(B_*) - \dotP) \\
-    &=& \Big(\d (-P(B)G(\P_*) + B) -\b(Q(\P) F(B_*))-\P)\Big)'
+    &=& \d(-\frac{\dotB}{F(B)}F(B_*) + \dotB)
+    -  \b(\frac{\dotP}{G(\P)}G(\P_*) - \dotP) \\
+    &=& \Big(\d (-P(B)F(B_*) + B) -\b(Q(\P) G(\P_*))-\P)\Big)'
 \end{IEEEeqnarray*}
 where $P$ and $Q$ are primitives of $1/F$ and $1/G$, and exist because $F$ and $G$ are continuous. This give us a conserved quantity 
 \begin{IEEEeqnarray*}{rCl}
-V(B,\P) &=& \d \big(-P(B)G(\P_*) + B\big) 
--\b\big(Q(\P) F(B_*)-\P\big) \\
+V(B,\P) &=& \d \big(-P(B)F(B_*) + B\big) 
+-\b\big(Q(\P) G(\P_*)-\P\big) \\
 &=& V(B(0),\P(0)) \\
 &=:& V_0
 \end{IEEEeqnarray*}
 Now we know then that $(B,\P) \in V^{-1}(\{V_0\})$, a closed set as V is continuous. [arguments for the fact that this is a cyclic orbit under asumptions on F and G][plots].
 Now that we know that it's cyclic with a period $\tau$, we derive a modified Voltera principle by integrating these qualities obtained from \prettyref{eq:LV*} :
-\[ \dotB / F(B) = \b (F(B_*) - G(\P)). \]
+\[ \dotB / F(B) = \b (G(\P_*) - G(\P)). \]
 the left side gives
 \begin{IEEEeqnarray*}{rCl}
     \int_0^\tau \frac{\dotB}{F(B)} 
@@ -85,17 +85,17 @@ the left side gives
      = P(B(\tau))-P(B(0)) =  P(B(0))-P(B(0)) =0,
 \end{IEEEeqnarray*}
 and then the rigth side
-  \[ 0= \int_0^\tau \b (F(B_*) - G(\P))
-    = \tau\b F(B_*) - \int_0^\tau \b  G(\P) \]
+  \[ 0= \int_0^\tau \b (G(\P_*) - G(\P))
+    = \tau\b G(\P_*) - \int_0^\tau \b  G(\P) \]
 which implies that
- \[  F(B_*) = \frac1\tau\int_0^\tau G(\P). \]
+ \[  G(\P_*) = \frac1\tau\int_0^\tau G(\P). \]
  Note that if $G=$Id, this says that the mean of the population $\P$ during time is $F(B_*)$. By the same argument with the second equation, we obtain that similarly
-  \[  G(\P_*) = \frac1\tau\int_0^\tau F(B). \]
+  \[  F(B_*) = \frac1\tau\int_0^\tau F(B). \]
   \\ \\
   In \prettyref{sec:motiv}, we explained how the own size of a population can affect its growth. We presented the logistic growth consequence of this equation :
   \[\dotx = x(\a - \b x)\]
   We add then a term in the rates of \prettyref{eq:LV} to modelise the fact that the growth rate of a population decrease with the size of population due to environment capabilities or competition. Again we use $F$ and $G$ to quantify their importance :
-  \begin{equation} \label{eq:LV3}
+  \begin{equation} \label{eq:LV2}
     \begin{cases}
     \dotB &= F(B)(\a -\b G(\P) - \m F(B)) \\
     \dotP &= G(\P)(-\g +\d F(B) - \n G(\P))
@@ -144,15 +144,76 @@ In the other way there exist non L-stable points which are attracting. Such a po
 Now we can introduce a tool that will be useful to understand the limit comportment of the trajectories and will a tool to proove asymptotic stability.
 
 \begin{definition}
-    Assume $\mathbf{x}_*$ is a fixed point of a equation $\bdotx = \mathbf{F}(\mathbf{x})$. A function $f:U\to\R$ defined in a neighbourhood of $\mathbf{x}_*$, is said Lyanupov if \[L(\mathbf{x})>L(\mathbf{x}_*)\] 
-    for all $\mathbf{x}$ in $U$, and 
-    \[ \dot{L}(\phi(\mathbf{x},0)) <0= \dot{L}(\phi(\mathbf{x}_*,0))\]
-    for all $\mathbf{x}$ in $U\backslash\{\mathbf{x}_*\}$
+    Assume $\mathbf{x}_*$ is a fixed point of a equation $\bdotx = \mathbf{F}(\mathbf{x})$, and let a function $L:U\to\R$ defined in a neighbourhood of $\mathbf{x}_*$.
+    \\
+    The function $L$ is called a \emph{weak Lyanupov function} if \[L(\mathbf{x})>L(\mathbf{x}_*)\] 
+    and 
+    \[ \dot{L}(\xx):=\frac{\dd}{\dd t}L(\phi(\mathbf{x},0)) \leq 0 \]
+    for all $\mathbf{x}$ in $U$.
+    \\
+    The function $L$ is called a \emph{Lyanupov function} (or a \emph{strict Lyanupov function}) provided that we have the strict inequality $\dot{L}(\xx) < 0$ when $\xx\neq\xx_*$ and equality $\dot{L}(\xx_*) = 0$ (In this case we say that $\dot{L}$ is semipositive definite in $\xx_*$, and $L(\mathbf{x})>L(\mathbf{x}_*)$ guarantee anyway).
 \end{definition}
 
-\begin{theoreme}
-Let $\mathbf{x}_*$ a fixed point of the differential equation $\bdotx = \mathbf{F}(\mathbf{x})$ and $F$ a Lyanupov function on $U\ni\mathbf{x}_*$. Then $\mathbf{x}_*$ is asymptotically stable.
+\begin{theoreme} \label{th:Lianupov}
+Let $\mathbf{x}_*$ a fixed point of the differential equation $\bdotx = \mathbf{F}(\mathbf{x})$ and $L$ a weak Lyanupov function on $U\ni\mathbf{x}_*$. Then $\mathbf{x}_*$ is L-stable. If $L$ is a strict lyanupov function, $\mathbf{x}_*$ is attracting too and thus $L$ is asymptotically stable.
 \end{theoreme}
 \begin{proof}
-I'm god. test
+L-stable: Let's suppose first that $L$ is a weak Lyanupov function. Since $\dot{L}(\xx) \leq 0$, $L(\xx)$ is decreasing. Let be $\epsilon>0$. Up to taking it smaller, we suppose $B(\xx_*,\epsilon) \subset U$. But $L$ is continuous and $\partial B(\xx_*,\epsilon)$ is compact, we can then define
+\[m=\min_{\partial B(\xx_*,\d)}{L} \; \geq \; L(\xx_*),\]
+and since $L$ is continuous, there exists a $\epsilon>\d>0$ such that $L(\xx)<m$ when $\|\xx-\xx_*\|<\d$. Now, for all $\xx\in B(\xx_*,\d) \subset B(\xx_*,\epsilon)$, $L(\xx)<m$ mean that $\phi(x,t)$ cannot go out of $B(\xx_*,\epsilon)$, otherwise it would cross $\partial B(\xx_*,\epsilon)$ in a certain $t>0$, and  we would have the contradiction $m<L(\xx)=L(\phi(\xx,0)) \geq L(\phi(\xx,t)) \geq m$. Whave the L-stability.
+
+Attracting: Since $L(\xx)$ is decreasing and bounded below $L(\xx_*)$, $L(\xx(t))$ must have a limit when $t\to\infty$, let's say $L_{\infty}$. This implies that $\dot{L}(\xx(t)) \to 0$. Using first part, let be $\d_2>0$ such that for all $\xx$ in $B(\xx_*,\d_2)$, and for all $t>0$, $\phi(\xx,t) \in B(\xx_*,\epsilon)$. Now since $\phi(\xx,t)$ stay in a compact, there exists an accumulation point $\zz$ and a sequence $(t_n)_n$ growing to infinity such that $\lim_{n\to\infty} \phi(\xx,t_n) = \zz$. Because $\dot{L}$ is continuous, the limit $\lim_{n\to\infty} \dot{L}(\phi(\xx,t_n)) =0$ is actually $\dot{L}(\zz)$ and by hypothesis, $\zz$ must be $\xx_*$. Now because of the first part, as $\phi(\xx,t_n)$ approaches $\xx_*$, when $n$ is big enough $\phi(\xx,t)$ will stay arbitrarily near from $\xx_*$, assuring the convergence for all $t\to\infty$, and $\xx_*$ is attracting.
+
+from the two last parts we conclude that $\xx_*$ is asymptotically stable.
 \end{proof}
+
+We now return to our original problem: test the stability of $(\Bstar,\Pstar)$, the fixed point of
+\begin{equation} \label{eq:LV3}
+    \begin{cases}
+    \dotB &= F(B)(\a -\b G(\P) - \m F(B)) \\
+    \dotP &= G(\P)(-\g +\d F(B) - \n G(\P))
+    \end{cases}
+\end{equation}
+Literature tell us that there is no particular general method to find a Lyanupov function for generic equations. We note that concerning \prettyref{eq:LV}, we used a conserved quantity $V$ to prove periodicity of the trajectory. Let's try to use a similar version of this $V$ to obtain something that would not be constant and for our goal, decreasing :
+\[W(B,\P) = \d \big(-P(B)F(\Bstar) + B\big) 
+-\b\big(Q(\P) G(\Pstar)-\P\big).\]
+We compute its derivative along a solution $(B,\P)$:
+\begin{IEEEeqnarray*}{rCl}
+\dot{W}(B,\P) 
+&=& \frac{\dd}{\dd t} \bigg(\d \big(-P(B)F(\Bstar)+B\big)
+-\b\big(Q(\P) G(\Pstar)-\P\big)\bigg) \\
+&=& \d \big(-\frac{\dotB}{F(B)}F(\Bstar) + \dotB\big) 
+-\b\big(\frac{\dotP}{G(\P)} G(\Pstar)-\dotP\big) \\
+&=& \d \frac{\dotB}{F(B)}\big(-F(\Bstar) + F(B)\big) 
+-\b\frac{\dotP}{G(\P)}\big( G(\Pstar)-G(\P)\big) \\
+&=& \d (\a -\b G(\P) - \m F(B))\Delta_F 
++\b(-\g +\d F(B) - \n G(\P))\Delta_G \\
+&=& \d (\m F(B_{**}) +\b G(\P_{**}) -\b G(\P) - \m F(B))\Delta_F 
++\b(-\d F(B_{**}) + \n G(\P_{**}) +\d F(B) - \n G(\P))\Delta_G \\
+&=& \d (-\m\Delta_F - \b\Delta_G)\Delta_F 
++\b(\d\Delta_F-\n\Delta_G)\Delta_G \\
+&=& -\d\m\Delta^2_F - \b\n\Delta^2_G
+\end{IEEEeqnarray*}
+with $\Delta_F= F(B)-F(\Bstar)$ and 
+$\Delta_G= G(\P)-G(\Pstar)$. As a result, $\dot{W}(B,\P)$ is null only on $(\Bstar,\Pstar)$, otherwise it is strictly negative on $U=(\R^*_+)^2 \backslash\{(\Bstar,\Pstar)\}$. This is a Lyanupov function and thus, $(\Bstar,\Pstar)$ is asymptotically stable.  
+\\ \\
+For now, we don't know that if trajectories goes to $(\Bstar,\Pstar)$ independently of the initial point. We would like to prove a global convergence result. First we define the notion: 
+\begin{definition}
+    A fixed point $\xx_*$ of $\bdotx=\mathbf{F}(\mathbf{x})$ is said \emph{globally attractive} on a set $U$, if for all $\mathbf{x_0}\in U$, $\phi(\mathbf{x_0},t) \to \mathbf{x}_*$ as $t \to\infty$. In other words it is attractive without condition on the proximity of the initial point.
+\end{definition}
+\begin{definition}
+    A fixed point $\xx_*$ of $\bdotx=\mathbf{F}(\mathbf{x})$ is said \emph{globally asymptotically stable} on a set $U$, if it is globally attractive and L-stable. In other words it is asymptotically stable without condition on the proximity of the initial point for the convergence.
+\end{definition}
+Now, if we look at our proof of \prettyref{th:Lianupov} on Lianupov functions, we see that the proximity that we needed to obtain convergence, was just in purpose to have a compact and invariant[to define] set. Without loss of generality we can take the $\d_2$ as big as we want, as long as $\phi(B(\xx_*,\d_2)\times\R_+)$ is bounded in $U$. A criteria on the boundedness of $L^{-1}([L(\xx_*),L_0])$ will help us to obtain global attractivity :
+\begin{theoreme}
+Under the suppositions of \prettyref{th:Lianupov}, if we have in addition that for a scalar $L_0>L(\xx_*)$,
+\[ U_{L_0} = \{ \xx\in U | L(\xx) \leq L_0\} = L^{-1}\big([L(\xx_*);L_0]\big) \]
+is bounded and whose closure is contained in $U$, then $\xx_*$ is globally asymptotically stable on $U_{L_0}$.
+\end{theoreme}
+\begin{proof}
+First of all, $U_{L_0}$ is closed in the topology of $U$ because of the continuity of $L$. But since its euclidean closure is in U, it's actually closed in the all space. In addition, it is bounded, and thus, compact. Finally, all $\phi(\xx,0)$ in $U_{L_0}$ will stay in $U_{L_0}$, because of the monotonicity of $L(\phi(\xx,t))$ and we have the convergence by the same argument of \prettyref{th:Lianupov}, i.e. $L(\phi(\xx,t))\to L_\infty$, $\dot{L}(\phi(\xx,t))\to 0$, $\phi(\xx,t_n)\to \zz$ (because of the compacity of $U_{L_0}$), $\zz=\xx_*$, and $\phi(\xx,t)\to \xx_*$. This assure the global attractivity of $\xx_*$ on $U_{L_0}$, and hence, the global asymptotic stability, since the L-stability was assured yet.
+\end{proof}
+
+\begin{remarque}
+If the hypothesis is true for all $L_0>L(\xx_*)$ then it is actually globally asymptotic stable everywhere on U. Alternatively, if a set $U_0\subset U$ (possibly $U$ itself), is invariant and each trajectory is bounded, the same result hold.
+\end{remarque}
