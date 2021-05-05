@@ -5,10 +5,9 @@
 \usepackage{amssymb}  %pour les double Lettres
 \usepackage{IEEEtrantools} %pour les équations en collonnes
 \usepackage{amsthm} %pour les preuves
-%\usepackage[french]{babel} %pour...
-%\selectlanguage{french}
-%\usepackage[T1]{fontenc}
-%\usepackage[utf8]{inputenc} %...le français
+\usepackage[english]{babel} % la langue utilisée
+\usepackage[utf8]{inputenc} % encodage symboles entrée
+\usepackage[T1]{fontenc} % encodage symboles sortie
 \usepackage{fancyhdr} %pour les entêtes et pied de page
 %\usepackage[math]{blindtext} % pour le Lorem ipsum
 %\usepackage{enumitem} %pour changer les listes
@@ -17,6 +16,9 @@
 \usepackage{graphicx} % pour les graphiques
 %\usepackage{subfig} % pour les doubles figures
 \usepackage{float} % pour bien positionner les figures
+\usepackage[dvipsnames]{xcolor} % pour la couleur du texte et de la page
+\usepackage{biblatex} % bibliographie
+\usepackage{csquotes} % pour que la biblio s'adapte à la langue
 \usepackage{prettyref}
 \usepackage[hidelinks]{hyperref} % pour les hyperliens et références(mettre en dernier)
 
@@ -53,24 +55,28 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\dd}{\mathrm{d}}
 
+\newcommand{\com}[1]{\textcolor{ForestGreen}{[ \emph{#1} ]}}
+
 
 \pagestyle{fancy}
 \rhead{Chapter \thechapter}
 \lhead{*Lotka–Volterra Equations*}
 \chead{}
 
-\begin{document}
-
 \title{*Lotka–Volterra Equations*}
 \author{Benoît Müller}
 \date{}
-\maketitle
 
+\addbibresource{biblio.bib}
 
-\tableofcontents
-\include{chapitre1}
-\include{chapitre2}
-\include{chapitre3}
+\begin{document}
+    \maketitle
+    \tableofcontents
     
-
+    \include{chapitre1}
+    \include{chapitre2}
+    \include{chapitre3} 
+    
+    \nocite{*}
+    \printbibliography
 \end{document}
