@@ -1,1 +1,166 @@
 \chapter{Linear Ordinary Equations}
+\section{Solutions Space}
+In this chapter,we study explicit autonomous ordinary equations of first order that are linear, namely equations of the form 
+\[\dotxx=A\xx\]
+where $A$ is a $n\times n$ matrix and $\xx$ is a differentiable function from a real interval to $\R^n$. Note that as its derivative must be $C^\infty$, $\xx$ must be $C^\infty$ to exist. 
+
+First of all, we observe that the set of solution in a fixed interval is a vector subspace of $C^\infty$. Indeed for all solutions $\xx$, $\yy$ and a scalar $\a$, \[(\a\xx+\yy)'=\a\dotxx + \dot{\yy}=\a A\xx + A\yy=A(\a\xx+\yy)\] and the identical null function is trivially in the space. This motivate us to find a basis of this subspace and understand how to construct it.
+\begin{definition}
+    A collection of $k$ solutions $\xx_1,\dots,\xx_k$ on $I$ are said to be \emph{linearly independents} or \emph{independents}, if $\xx_1(t),\dots,\xx_k(t)$ are linearly independents for all $t\in I$.
+\end{definition}
+\begin{lemme}
+A collection $\xx_1,\dots,\xx_k$ on $I$ of solutions are linearly independents if and only if there exists a moment when their positions are linearly independents.
+\end{lemme}
+\begin{proof}
+If the solutions are independent we have the result by definition. In the other way, as $\xx\mapsto A\xx$ is Lipschitz continuous, we have by Picard that the solutions are uniques for a initial point given. Now if at a certain time $\tau$, the positions aren't independent, then we must have non all null scalar $\a_1,\dots,\a_k$ such that  $\a_1\xx_1(\tau) + \dots + \a_k\xx_k(\tau)=0$ but then 0 is a solution starting there and then actually  $\a_1\xx_1(t) + \dots + \a_k\xx_k(t)=0$ for all $t$ in $I$ and .
+\end{proof}
+This lemma prove that the space of solution has the same dimension the space $\R^n$ i.e. $n$.
+In order to manipulate the solutions, we put them in a matrix, like $(\xx_1,\dots,\xx_k)$. In this form we see that we can actually extend the equation to matrix entries: 
+\[\dot{X}=AX\]
+and since 
+\[\dot{X}=(\dotxx_1,\dots,\dotxx_k)  
+\text{ and } 
+AX=A(\xx_1,\dots,A\xx_k)=(A\xx_1,\dots,A\xx_k)\]
+A matrix X is a solution if and only if its columns are vector solutions. We see that for a vector $v\in\R^k$, $Xv$ is a vector solution $(Xv)' = \dot{X}v = AXv$. This solution ca be written as $Xv = v_1\xx_1 + \dots + v_k\xx_k$ and is thus a linear combination of the column solutions of $X$. Thus a matrix solution permit us to easily write new solutions as linear combinaison of a collection of solutions. As the dimension of the space of solutions is $n$,exactly $n$ linear independents solutions will be enough to construct all solutions as a product of the matrix solution constructed with them.
+\begin{definition}
+    If a matrix solution $M=(\xx_1,\dots,A\xx_n)$ is square(k=n) and of full rank, then it is called a emph{fundamental matrix solution} and $\{\xx_1,\dots,A\xx_k\}$ a \emph{fundamental set of solutions}.
+\end{definition}
+with such a $M$, $M\R^n$ is the all space of solutions. At a time $t=0$, $M(0)v=v_1\xx_1(0) + \dots + v_k\xx_k(0)$ meaning that with the condition $\xx(0)=x_0$, v must be chosen to be the vector of coordinates of $x_0$ in the basis of the columns of M.
+\\ \\
+This done, we can look at the forms the solutions can take. In one dimension, the problem is $\dotx=ax$ and if a is non null, non trivial solutions respect $a=(\log|x|)'$ which give $\log|x(t)|=at+c$ and $x(t)=\pm e^{at+c}=x_0e^{at}$. We check easily that $e^{at}$ is indeed a solution. The $n$-dimensional case is more complex. We try to put the equation in its integral form and derive a property by recurrence (supposing $X_0=I$ for simplicity): 
+\begin{IEEEeqnarray*}{rCl}
+X(t) 
+&=& I + \int_0^t AX(s) \dd s 
+= I + \int_0^t A\bigg(I + \int_0^{s_1} AX(s_2) \dd s_2\bigg) \dd s_1
+= I + tA +\int_0^t \int_0^{s_1} A^2X(s_2) \dd s_2 \dd s_1
+\\ &=& I + tA + \frac12(tA)^2 + \int_0^t \int_0^{s_1} \int_0^{s_3} A^3X(s_3) \dd s_2 \dd s_1
+\end{IEEEeqnarray*}
+We see the Taylor expansion of $\exp$ appear, as a generalisation to matrices. This motivate the following definition:
+\begin{definition}
+If it converges, we define the \emph{exponential} $e^A$ of a square matrix A and the underlying function $\exp$ as the infinite sum 
+\[e^A = \sum_{n=0}^\infty \frac{1}{n!}A^n\]
+\end{definition}
+\begin{lemme} \label{lem:exp}
+The exponential of a matrix always converge
+\end{lemme}
+\begin{proof}
+We use $\|.\|$ for the operator norm on matrices, keeping in mind that all matricies norms are equivalent. Now we have by basic properties of this norm that 
+\[ \sum_{n=0}^N \|\frac{1}{n!}A^n\| 
+\leq \sum_{n=0}^N \frac{1}{n!}\|A^n\| 
+\leq \sum_{n=0}^N \frac{1}{n!}\|A\|^n \]
+
+and this is the Taylor finite expansion of $\|A\|$, which converge for all value of $\|A\|$. As a result the sum is absolutely convergent for the operator norm, and then must converge.
+\end{proof}
+\begin{theoreme}
+For a matrix $A$ and a scalar $t$, the quantity $e^{tA}$ is differentiable with respect to $t$ and has derivative $\dd/{\dd t} (e^{tA}) = Ae^{tA}$
+\end{theoreme}
+\begin{proof}
+Each coordinate of the series is actually a convergent Taylor series in t and is then analytic. The theory of analytic functions tell us that they are $C^\infty$ and that we can derive term by term. However, we explain the argument of the proof in our case: As seen in \prettyref{lem:exp}, the sum converge absolutely, and in our case it converge locally uniformly in $t$ when $N\to\infty$, because if $|t|\leq t_{max}$, 
+\[ \sum_{n=0}^N \|\frac{1}{n!}t^nA^n\|
+\leq \sum_{n=0}^N \frac{1}{n!}(t_{max}\|A\|)^n\] converge without independence in $t$ for the last quantity. Similarily, \[ \frac{\dd}{\dd t}\sum_{n=0}^N\frac{1}{n!}t^nA^n
+= \sum_{n=1}^N \frac{1}{(n-1)!}t^{n-1}A^n
+= A\sum_{n=0}^N \frac{1}{n!}(tA)^n\]
+converge locally uniformly to $Ae^{tA}$ for the same reason. As a result, since the partial sums and the derivatives of the partial sums converge locally uniformly, the limit is differentiable with derivative the limit of the derivatives of the partial sums, namely $Ae^{tA}$ and we have the result.
+\end{proof}
+All of this tell us that as we expected, $e^{tA}$ is a matrix solution to the linear differential equation.
+\begin{corollaire}
+The matrix $e^{tA}$ is a fundamental solution and each solution write $x(t)=e^{tA}x_0$
+\end{corollaire}
+\begin{proof}
+We evaluate it in $t=0$ by direct calculation since the sum become finite: 
+\[e^{0A}=\sum_{n=0}^\infty \frac{1}{n!}(0A)^n = I.\]
+So the initial matrix is non singular, meaning that it will stay along the time non singular and $e^{tA}$ is a fundamental matrix solution with formula $x(t)=e^{tA}x_0$.
+\end{proof}
+
+For matrices that are not in a special form, we cannot explicitly compute the series of the exponential and then then neither the solutions. Specials forms of matrices whose exponential are commutable are for example the ones where the power of the matrix has a general formula, like diagonal matrices. We know that diagonal matrices are directly related to eigenvalues and eigenvectors. The eigenvector are the directions where the matrix act like in the one dimensional case and as often, it is a way to find similar results in the higher dimensional problems.
+
+Let's investigate what happens in theses directions, and choose a candidate that look like a one dimensional solution,$e^{\l t}v$, for a real eigenvalue $\l$ of the matrix $A$ and the corresponding eigenvector~$\vv$. We compute its derivative and obtain 
+\[\dd/{\dd t}(e^{\l t}v) =  e^{\l t}\l v = e^{\l t}Av = A(e^{\l t}v).\]
+This give us indeed a non trivial solution since the eigenvector is non null. Theses kind of solutions can be seen in the computation of the exponential when we have a basis of eigenvectors and that in consequence, the matrix $A$ is diagonalisable like $A=PDP^{-1}$ where $D$ is the diagonal matrix of the eigenvalues and P is the non singular matrix formed by the eigenvector. Then 
+\[ A^n= (PDP^{-1})^n = PDP^{-1}\cdots PDP^{-1} = PD^nP^{-1} \]
+and 
+\[ e^{tA} 
+= Pe^{tD}P^{-1} 
+= P\text{diag}(e^{\l_jt})P^{-1} 
+= (v_1e^{\l_1t},\dots,v_ne^{\l_nt})P^{-1} 
+\]
+which is the fundamental matrix of the kind of solutions we find before, up to a reparametrization.
+
+This was the simple case. More generally the matrix can have complex eigenvalues with complex eigenvectors, but the following lemma show us that complex solutions are made of real solutions :
+\begin{lemme} \label{lem:complex}
+If $\zz=\xx+i\yy$ is a complex solution of real and imaginary parts $\xx$ and $\yy$, then $\xx$ and $\yy$ are real solutions.
+\end{lemme}
+\begin{proof}
+This can be shown by the simple fact that
+\[\dotxx+i\dotyy =\dotzz = A\zz = A\xx+iA\yy \]
+and that the real and respectively imaginary parts must be equals along the equalities, giving us $\dotxx=A\xx$ and $\dotyy=A\yy$ wich is the result.
+\end{proof}
+We must then consider complex solutions obtained by complex eigenvalues too. We sum up the results together in the following theorem.
+\begin{theoreme} \label{th:eigensolutions}
+For a complex eigenvalue $\s=\a+i\b$ of $A$ with eigenvector $w=u+iv$, we have the two independent solutions
+\[e^{\a t}(\cos(\b t)u - \sin(\b t)v)\] 
+\[e^{\a t}(\cos(\b t)v + \sin(\b t)u).\] 
+In particular, if $\s$ is real, this give only one solution $e^{\a t}u.$ 
+\end{theoreme}
+\begin{proof}
+First we have that $e^{\s t}w$ is a complex solution, since 
+\[\ddt(e^{\s t}w) = e^{\s t}\s w = e^{\s t}Aw = A(e^{\s t}w).\]
+Then by \prettyref{lem:complex}, the real and the imaginary parts are real solutions, we compute them by rewriting the complex solution:
+\[e^{\s t}w = e^{\a t}(\cos(\b t) + i\sin(\b t))(u+iv)
+= e^{\a t}(\cos(\b t)u - \sin(\b t)v) + ie^{\a t}(\cos(\b t)v + \sin(\b t)u).\]
+We recognise the resulting solutions in the real and imaginary part and if we evaluate them in t=0, we get respectively $u$ and $v$. To be linearly dependent, $u$ should be proportional to $v$, i.e. $v=au$. But now $v$ cannot be null, and then $\b$ neither. As a result we can evaluate the solutions in $t=\pi/(2\b)$ and we obtain respectively $-e^{\a\pi/(2\b)}v$ and $e^{\a\pi/(2\b)}u$. These two points must be with the same proportion as in $t=0$. This is impossible as it would implies that $u=-av=-u=0$. The two solutions are then independents and the first part of the result is proven. It follow directly by setting $\b=0$ that the solutions is $e^{\a t}(\cos(0)u - \sin(0)v) = e^{\a t}u$ and  $e^{\a t}v$. But since the eigenvalue is real, the eigenvector is real too and $v=0$ letting only one non trivial solution.
+\end{proof}
+\begin{remarque}
+Note that complex values come by pairs of conjugates, as well as the eigenvectors: \\
+$Aw=\s w$ implies $A\overline{w} = \overline{A}\overline{w} = \overline{Aw}= \overline{\s w} = \overline{\s}\overline{w}$. However, this doesn't give us a new solution because $e^{\overline{\s} t}\overline{w}= \overline{e^{\s t}}\overline{w} = \overline{e^{\s t}w}$ has the same real and imaginary part as $e^{\s t}w$ up to the sign.
+\end{remarque}
+\section{Stability}
+In other terms, this last \prettyref{th:eigensolutions} tell us that each non null real eigenvalue gives direction(s) where the trajectories are straight and of exponential velocity, each null eigenvalue give direction(s) where trajectories are fixed, and each non real eigenvalue gives subspace(s) (not lines) where the trajectories are like ellipses that change of size exponentially.
+
+All these considerations are only on the special directions of the eigenvectors, and act like the one dimensional case. Depending of the sign of the real part of the eigenvalues, theses specials solutions go very fast to $0$, stay in an orbit, or diverge very fast to infinity values. This motivate us to see how these specials solutions act together, what is the asymptotically comportment of trajectories, how stable is the origin, and make a classification about all theses factors.
+First of all we define concepts about stability, and asymptotic converge. For this we put ourself in a more general cadre, with a $C^1$ function $\FF$ and the equation 
+\[\dotxx = \FF(\xx)\]
+The regularity of $\FF$ give a flow $\phi(\xx_0,t)$ which encapsulate all solutions:
+\begin{IEEEeqnarray*}{rCl}
+\dot{\phi}(\xx_0,t) &=& \FF(\phi(\xx_0,t)) \\
+\phi(\xx_0,0) &=& \xx_0
+\end{IEEEeqnarray*}
+\begin{definition}
+    A solution x is \emph{Lyanupov-stable} or \emph{L-stable} if the flow is continuous in $\xx(0)$ and uniformly in $t$. Namely, if for all $\e>0$ there exist a $\d>0$ such that $\|\zz-\xx(0)\|<\d$ implies that for all $t\geq0$, $\|\phi(\zz,t)-\xx(t)\|<\e$.
+\end{definition}
+\begin{definition}
+    Two solutions $\xx$ and $\yy$ are $\omega$\emph{-attracted} to each other if $\lim_{t\to\infty}\|\yy(t)-\xx(t)\| = 0$. The resulting equivalence class is called the \emph{basis of attraction}. A solution $\xx$ is said \emph{$\omega$-attracting} or \emph{attracting} if there is a $\d>0$ such that $\|\zz_0-\xx_0\|<0$ implies that $\phi(\zz_0,t)$ is in the basin of attraction of $\xx$. A solution is said \emph{globally $\omega$-attracting} (or \emph{globally attracting}) on a set if this set is in the basin of attraction. We do not need to specify the set if it's the all solution space.
+\end{definition}
+\begin{definition}
+    A solution x is \emph{asymptotically stable} if it is L-stable and attracting.
+\end{definition}
+\begin{lemme}
+    Attractivity and L-stability are not consequence of the other in any sense. 
+\end{lemme}
+\begin{proof}
+Any solution of $\dotxx=0$ is L-stable but any of them are attracting. We can construct a flow on the plane where all solutions tends to $(1,1)$, but all solutions that start in $\R\times\R_+^*$, even in the neighbourhood of $(1,1)$, goes around (0,0) before. \com{présenter la construction}
+\end{proof}
+\begin{lemme}
+    When $\FF$ is linear, all solutions have the same L-stability and attractivity.
+\end{lemme}
+\begin{proof}
+In the linear case, $\phi$ is linear in the first variable, indeed $\phi(\xx_0,t) = e^{tA}\xx_0 =: X(t)\xx_0$. Now for any solution $\xx$ and all initial point $\zz$,
+\[ \|\phi(\zz,t)-\xx(t)\| = \|X(t)\zz-X(t)\xx(0)\| = \|X(t)(\zz-\xx_0)\| =\|\phi((\zz-\xx_0),t)-\phi(0,t)\|, \] meaning that L-stability and attractivity is entirely determined by the stability of the trivial solution $\phi(0,t)=0$.
+\end{proof}
+\begin{remarque}
+    Therefore, we can speak of the L-stability and the attractivity of a linear system, meaning that it applies to all solutions, or none of them. In this case the system is L-stable if and only if there exists a $\d>0$ such that $\|\xx_0\|<\d$ implies that for all $t\geq0$, $\|\phi(\xx_0,t)\|<\e$. The system is attracting if and only if there exists a $\d>0$ such that $\|\xx_0\|<\d$ implies that $\phi(\xx_0,t) \to 0$.
+\end{remarque}
+ 
+ \begin{theoreme}
+ A linear autonomous system is stable if and only if each of its solutions is bounded for positive times.
+ \end{theoreme}
+  \begin{theoreme}
+A linear autonomous system is asymptotically stable is it is globally asymptotically stable.
+ \end{theoreme}
+   \begin{theoreme}
+A linear homogeneous system with constant coefficients is \\
+1) stable if and only if all the eigenvalues of the coefficient matrix have nonpositive real parts, and simple elementary divisors correspond to the eigenvalues with zero real
+part \\
+2) asymptotically stable if and only if all the eigenvalues of the coefficient matrix
+have negative real parts.
+ \end{theoreme}
