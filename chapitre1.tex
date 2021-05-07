@@ -112,13 +112,82 @@ We recognise the resulting solutions in the real and imaginary part and if we ev
 \end{proof}
 \begin{remarque}
 Note that complex values come by pairs of conjugates, as well as the eigenvectors: \\
-$Aw=\s w$ implies $A\overline{w} = \overline{A}\overline{w} = \overline{Aw}= \overline{\s w} = \overline{\s}\overline{w}$. However, this doesn't give us a new solution because $e^{\overline{\s} t}\overline{w}= \overline{e^{\s t}}\overline{w} = \overline{e^{\s t}w}$ has the same real and imaginary part as $e^{\s t}w$ up to the sign.
+$Aw=\s w$ implies 
+$$A\overline{w} = \overline{A}\overline{w} = \overline{Aw}= \overline{\s w} = \overline{\s}\overline{w}.$$
+However, this doesn't give us a new solution because $$e^{\overline{\s} t}\overline{w}= \overline{e^{\s t}}\overline{w} = \overline{e^{\s t}w}$$
+has the same real and imaginary part as $e^{\s t}w$ up to the sign. As a result, a complex eigenvalue give two solutions but together with its conjugate, they give us still two solutions, so we can find as many independent solutions as independent eigenvector we find, real or not.
 \end{remarque}
-\section{Stability}
-In other terms, this last \prettyref{th:eigensolutions} tell us that each non null real eigenvalue gives direction(s) where the trajectories are straight and of exponential velocity, each null eigenvalue give direction(s) where trajectories are fixed, and each non real eigenvalue gives subspace(s) (not lines) where the trajectories are like ellipses that change of size exponentially.
+\quad \\
+Now we have to deal with the case when we don't have a basis of eigenvectors. In this case, some eigenvalue $\l$ with algebraic multiplicity $\m_a$ and a geometric multiplicity
+$$\m_g=\dim\ker(A-\l I) < \m_a.$$
+Such an eigenvalue is said \emph{defective}, and the matrix is said \emph{defective} too when it has at least one defective eigenvalue. We use here the concept of generalized eigenvector that come from the result about the Jordan form:
 
-All these considerations are only on the special directions of the eigenvectors, and act like the one dimensional case. Depending of the sign of the real part of the eigenvalues, theses specials solutions go very fast to $0$, stay in an orbit, or diverge very fast to infinity values. This motivate us to see how these specials solutions act together, what is the asymptotically comportment of trajectories, how stable is the origin, and make a classification about all theses factors.
-First of all we define concepts about stability, and asymptotic converge. For this we put ourself in a more general cadre, with a $C^1$ function $\FF$ and the equation 
+\begin{definition}
+    A vector $\ww$ is a \emph{generalized eigenvector} of rank $m$  of a matrix A and corresponding to an eigenvalue $\l$, if it a vector (complex if $\l$ is complex) that satisfy
+    $$(A-\l I)^m\ww=0 \quad\text{and}\quad (A-\l I)^{m-1}\ww\neq0$$
+    for a $m\in\N^*$.
+    
+    A \emph{canonical} basis of generalised eigenvectors is a basis of generalised eigenvector such that for all generalized eigenvector $\ww$ of rank $m$ that is in the basis, for all $0<j<m$, $(A-\l I)^j\ww$ are generalised eigenvectors of rank $m-j$ with respect to $\l$, and are in the basis too.
+\end{definition}
+
+Note that with $m=1$, a generalised vector is a usual eigenvector.
+    
+\begin{theoreme}
+    There always exist a canonical basis of generalised eigenvectors.
+\end{theoreme}
+\begin{proof}
+    Without proof. See \com{some reference}.
+\end{proof}
+
+In term of computation, we start from $(A-\l I)\vv=0$ to find the eigenvectors. Then we search for some $\ww$ such that $(A-\l I)\ww=\vv$, assuring that $(A-\l I)^2\ww=(A-\l I)\vv=0$ and hence that $\ww$ is a generalised vector of rank 2. We continue like this making a chain of generalised vectors. Even if we decide to take into account complex vectors
+
+Now we show how this is actually useful, by looking at the solution starting at a generalised eigenvector $\ww$ of rank $m$ with respect to the defective eigenvalue $\l$.
+\begin{theoreme} \label{th:solutiondegeneree}
+ For a canonical basis $B$ of generalised eigenvectors, we have a set of independent complex solutions with form $e^{t\l}p_\ww(B)$, where $\l$ is the eigenvalue assosiated to a generalised eigenvector $\ww$ of rank $m$ in the basis, and $p_\ww$ is a polynomial in $B[t]$ of degree $m-1$.
+\end{theoreme}
+\begin{proof}
+We see easily that the basic property of the exponential that changes sum into product is true for the commutative matrices with the condition that the matrices commute. The proof is the same as in the real case as we have already proven absolute convergence. 
+We write $A= \l I + (A-\l I) $ and $\l I$ is diagonal hence commutative with all matrices. Taking $\ww$ from a canonical basis, we get
+\begin{IEEEeqnarray}{rCl} \label{eq:solutioncomplexe}
+e^{tA}\ww 
+&=& e^{t\l I + t(A-\l I)}\ww 
+=e^{t\l I} e^{t(A-\l I)}\ww 
+= e^{t\l}\sum_{n=0}^\infty \frac{1}{n!}t^n(A-\l I)^n\ww
+= e^{t\l}\sum_{n=0}^{m-1} \frac{1}{n!}t^n\ww_n 
+\end{IEEEeqnarray}
+where the $\ww_n=(A-\l I)^n\ww$ are other generalised vectors in the canonical basis. So have indeed a polynomial in $t$ with generalised eigenvectors coefficients. These are surely independent solutions for different choices of $\ww$ since the generalised eigenvectors are supposed independent and they are the initial values of these solutions, the proof is complete.
+\end{proof}
+As a result with this theorem we obtain a independent set of $d$ complex solutions, where $d$ is the dimension of the space. But we know that eigenvalues and eigenvectors come by pairs of conjugates. It is the same for generalised eigenvectors and eigenvalues:
+$$(A-\l I)^m\ww=0 \quad\text{and}\quad (A-\l I)^{m-1}\ww\neq0$$
+implies
+$$(A-\overline{\l} I)^m\overline{\ww}=0 \quad\text{and}\quad (A-\overline{\l} I)^{m-1}\overline{\ww}\neq0$$
+So we will get solutions like \prettyref{eq:solutioncomplexe} by pairs of conjugates. by subtracting them or summing them, we get two real new solutions that we will call \emph{degenerated}:
+$$
+    e^{tA}\ww + e^{tA}\overline{\ww} 
+    = e^{tA}(\ww+\overline{\ww})
+    = 2e^{tA}\Re(\ww), 
+$$
+$$
+    e^{tA}\ww - e^{tA}\overline{\ww} 
+    = e^{tA}(\ww-\overline{\ww})
+    = 2e^{tA}\Im(\ww).
+$$
+\com{prouver que on garde des solutions indépendantes}
+\begin{corollaire} \label{cor:formesolutionlineaire}
+    All solutions to linear system have coordinates that are linear combinations of the following functions :
+    \begin{itemize}
+    \item $e^{\l t}$ 
+    \item $e^{\a t}\cos(\b t)$ , $e^{\a t}\sin(\b t)$
+    \item $t^je^{\l t}$ , $t^je^{\a t}\cos(\b t)$ , $t^je^{\a t}\sin(\b t)$ 
+    \end{itemize}
+    where $\l$ is a real eigenvalue, $\s=\a+i\b$ is an imaginary eigenvalue, $0\leq j< m_a$ is a natural number with $m_a$ the algebraic multiplicity of $\s$. Note that each point is a generalisation of the precedent.
+\end{corollaire}
+
+\section{Stability}
+In other terms, the \prettyref{th:eigensolutions} tell us that each non null real eigenvalue gives direction(s) where the trajectories are straight and of exponential velocity, each null eigenvalue give direction(s) where trajectories are fixed, and each non real eigenvalue gives subspace(s) (not lines) where the trajectories are like ellipses that change of size exponentially. The \prettyref{th:solutiondegeneree} add other sort of solutions as polynomials resized by a exponential.
+
+All these considerations are only on the special directions. Depending of the sign of the real part of the eigenvalues, theses specials solutions go very fast to $0$, stay in an orbit, diverge very fast to infinity values, or maybee follow a polynomial. This motivate us to see how these specials solutions act together, what is the asymptotically comportment of trajectories, how stable is the origin, and make a classification about all theses factors.
+First of all we define concepts about stability, and asymptotic converge. For this we put our self in a more general cadre which will be useful later, with a $C^1$ function $\FF$ and the equation 
 \[\dotxx = \FF(\xx)\]
 The regularity of $\FF$ give a flow $\phi(\xx_0,t)$ which encapsulate all solutions:
 \begin{IEEEeqnarray*}{rCl}
@@ -126,13 +195,13 @@ The regularity of $\FF$ give a flow $\phi(\xx_0,t)$ which encapsulate all soluti
 \phi(\xx_0,0) &=& \xx_0
 \end{IEEEeqnarray*}
 \begin{definition}
-    A solution x is \emph{Lyanupov-stable} or \emph{L-stable} if the flow is continuous in $\xx(0)$ and uniformly in $t$. Namely, if for all $\e>0$ there exist a $\d>0$ such that $\|\zz-\xx(0)\|<\d$ implies that for all $t\geq0$, $\|\phi(\zz,t)-\xx(t)\|<\e$.
+    A solution x is \emph{Lyanupov stable} ( or \emph{L-stable}, or simply \emph{stable}) if the flow is continuous in $\xx_0$ and uniformly in $t$. Namely, if for all $\e>0$ there exist a $\d>0$ such that $\|\zz-\xx(0)\|<\d$ implies that for all $t\geq0$, $\|\phi(\zz,t)-\xx(t)\|<\e$.
 \end{definition}
 \begin{definition}
     Two solutions $\xx$ and $\yy$ are $\omega$\emph{-attracted} to each other if $\lim_{t\to\infty}\|\yy(t)-\xx(t)\| = 0$. The resulting equivalence class is called the \emph{basis of attraction}. A solution $\xx$ is said \emph{$\omega$-attracting} or \emph{attracting} if there is a $\d>0$ such that $\|\zz_0-\xx_0\|<0$ implies that $\phi(\zz_0,t)$ is in the basin of attraction of $\xx$. A solution is said \emph{globally $\omega$-attracting} (or \emph{globally attracting}) on a set if this set is in the basin of attraction. We do not need to specify the set if it's the all solution space.
 \end{definition}
 \begin{definition}
-    A solution x is \emph{asymptotically stable} if it is L-stable and attracting.
+    A solution is \emph{asymptotically stable} if it is L-stable and attracting. It is said \emph{globally asymptotically stable} if it is L-stable and globally attracting
 \end{definition}
 \begin{lemme}
     Attractivity and L-stability are not consequence of the other in any sense. 
@@ -141,26 +210,82 @@ The regularity of $\FF$ give a flow $\phi(\xx_0,t)$ which encapsulate all soluti
 Any solution of $\dotxx=0$ is L-stable but any of them are attracting. We can construct a flow on the plane where all solutions tends to $(1,1)$, but all solutions that start in $\R\times\R_+^*$, even in the neighbourhood of $(1,1)$, goes around (0,0) before. \com{présenter la construction}
 \end{proof}
 \begin{lemme}
-    When $\FF$ is linear, all solutions have the same L-stability and attractivity.
+    When $\FF$ is linear, i.e. $\dotxx=A\xx$, all solutions have the same L-stability and attractivity.
 \end{lemme}
 \begin{proof}
 In the linear case, $\phi$ is linear in the first variable, indeed $\phi(\xx_0,t) = e^{tA}\xx_0 =: X(t)\xx_0$. Now for any solution $\xx$ and all initial point $\zz$,
 \[ \|\phi(\zz,t)-\xx(t)\| = \|X(t)\zz-X(t)\xx(0)\| = \|X(t)(\zz-\xx_0)\| =\|\phi((\zz-\xx_0),t)-\phi(0,t)\|, \] meaning that L-stability and attractivity is entirely determined by the stability of the trivial solution $\phi(0,t)=0$.
 \end{proof}
 \begin{remarque}
-    Therefore, we can speak of the L-stability and the attractivity of a linear system, meaning that it applies to all solutions, or none of them. In this case the system is L-stable if and only if there exists a $\d>0$ such that $\|\xx_0\|<\d$ implies that for all $t\geq0$, $\|\phi(\xx_0,t)\|<\e$. The system is attracting if and only if there exists a $\d>0$ such that $\|\xx_0\|<\d$ implies that $\phi(\xx_0,t) \to 0$.
+    Therefore, we can speak of the L-stability and the attractivity of a linear system, meaning that it applies to all solutions, or none of them, and doing it by looking at the trivial solution 0. In this case the system is L-stable if and only if there exists a $\d>0$ such that $\|\xx_0\|<\d$ implies that for all $t\geq0$, $\|\phi(\xx_0,t)\|<\e$. The system is attracting if and only if there exists a $\d>0$ such that $\|\xx_0\|<\d$ implies that $\phi(\xx_0,t) \to 0$.
 \end{remarque}
  
- \begin{theoreme}
- A linear autonomous system is stable if and only if each of its solutions is bounded for positive times.
+ \begin{theoreme} \label{th:stablecondition}
+     The linear system is L-stable if and only if each of its solutions is bounded for positive times.
  \end{theoreme}
-  \begin{theoreme}
-A linear autonomous system is asymptotically stable is it is globally asymptotically stable.
- \end{theoreme}
-   \begin{theoreme}
-A linear homogeneous system with constant coefficients is \\
-1) stable if and only if all the eigenvalues of the coefficient matrix have nonpositive real parts, and simple elementary divisors correspond to the eigenvalues with zero real
-part \\
-2) asymptotically stable if and only if all the eigenvalues of the coefficient matrix
-have negative real parts.
- \end{theoreme}
+ \begin{proof}
+  Suppose the system is L-stable, and for contradiction that a solution $\xx$ is not bounded. Let $\d>0$ be the distance given by the stability, such that all solutions that start with a norm smaller than $\d$ don't go away the unit ball. We can then define an other solution $\yy=\d\xx/\|\xx(0)\|$ and $\|\yy(0)\|=\d$, so $\yy$ wont go away the unit ball and is bounded. This contradict the fact that $\xx$ and $\yy$ are proportionals and all solutions must be bounded.
+  
+  Suppose now that all solutions are bounded. Then the columns of $X=e^{tA}$ the fundamental system are bounded, implying that actually the norm of X is bounded (all norm on finite dimensional spaces are equivalent). Now we get 
+  \[ \|\phi(x_0,t)\|=\|X(t)x_0\| 
+  \leq \|X(t)\| \|\xx_0\| 
+  \leq \max_{t\geq0} \|X(t)\| \|\xx_0\| \]
+  which is smaller than any positive $\e$ as soon as $\|\xx_0\|<\e/\max_{t\geq0} \|X(t)\|$ and give us the stability of the sytem.
+ \end{proof}
+\begin{theoreme}
+    The linear system is globally asymptotically stable if and only if it is attracting.
+\end{theoreme}
+\begin{proof}
+By definition, global asymptotic stability implies global attractivity and so in particular attractivity with any radius condition. In the other direction, if it is attracting with radius condition $\d$, such that when $\|\xx_0\|<\d$, $\|\phi(\xx_0,t)\|\to0$. Then any solution $\xx$ can be written $\xx=\|\xx(0)\|\yy/\d$ where $\yy=\d\xx/\|\xx(0)\|$ is a proportional solution that start with norm $\d\|\xx(0)\|/\|\xx(0)\|=\d$ and is small enough to converge to zero, implying that $\xx=\xx(0)\yy/\d$ converge to zero too. The system is globally attracting by arbitrarity of $\xx$. Now that all solutions are converging to zero, they are all bounded and by \prettyref{th:stablecondition}, we know that the system is actually stable. Both condition of stability and global attractivity are reunited, the system is globally asymptotically stable.
+\end{proof}
+\begin{theoreme}
+    The linear system is 
+    \begin{enumerate}
+     \item L-stable if and only if all the eigenvalues of the matrix have non positive real parts, and all the one that are defective have negative real part.
+    \item globally asymptotically stable if and only if all the eigenvalues of the matrix
+    have negative real parts.
+    \end{enumerate}
+\end{theoreme}
+\begin{proof} 
+\quad\\
+\begin{enumerate}
+\item 
+By \prettyref{th:stablecondition}, we just have to show that the conditions on the eigenvalues are equivalent to the fact that the solutions are bounded. The \prettyref{cor:formesolutionlineaire} told us the possible forms of all solutions. The functions $t^je^{\a t}\cos(\b t)$ , $t^je^{\a t}\sin(\b t)$ describe all the possibilities of linear combinations for the coordinates.
+
+For both, if the eigenvalue $\s=\a+i\b$ is non defective, then $j=0$ and they are bounded if $\a$ is non positive. If $\s$ is defective, $j>0$ and they are bounded if $\a$ is negative because the exponential is $O(t^j)$ for all $j$'s. The sytem is now stable.
+
+Alternatively, if there exists an eigenvalue $\s=\a+i\b$ with eigenvector $w=u+iv$ that have a positive real part, then by \prettyref{th:eigensolutions}, there exist a solution $e^{\a t}(cos(\b t)u-\sin(\b t)v)$ and its norm $e^{\a t}\|cos(\b t)u-\sin(\b t)v\|$
+is not bounded since $cos(\b t)u-\sin(\b t)v$ doesn't converge to zero. If $\s$ is defective and is purely imaginary, then \prettyref{th:solutiondegeneree} tell us that there exist a solution $p_w(t)$, polynomial of non null degree, and $p_w(t)\to\infty$ when $t\to\infty$ because of the dominant term. There exists solutions that are unbounded , and the system is not stable.
+
+\item 
+By \prettyref{th:stablecondition}, we just have to show that the conditions on the eigenvalues are equivalent to the fact that the system is attracting.
+
+But following the considerations of the first part, if all eigenvalues have negative real parts, there is always a $e^{\a t}$ with $\a<0$ term in front of the bases solutions and they all converge to zero. The system is attracting, and globally asymptotically stable.
+
+Alternatively if it's not the case and that $\s=\a+i\b$ has a non negative part, we have a solution $e^{\a t}p_w(t)$ that repect $\|e^{\a t}p_w(t)\| \geq \|p_w(t)\|$ which doesn't go to zero. The system is not attracting and then not globally asymptotically stable.
+\end{enumerate}
+\end{proof}
+
+This is the result we wanted in this section. It motivate the categorisation of linear systems, by taking to account the nature of their stability. We make the difference when there is a rotation effect or not
+\begin{definition}
+    For a sytem $\dotxx=A\xx$, we set the following denomination of the matrix $A$ and more generally of the system, regarding the nature of the eigenvalues of $A$.
+    \begin{itemize}
+    \item \emph{Stable} : all eigenvalues are real, negative and non defective. ($\R^*_+$)
+    \com{revoir notation pour ne pas confondre stable et L-stable\dots}
+    \item \emph{Source (unstable)} : $-A$ is stable. i.e. all eigenvalues are real, positive, and non defective. ($\R^*_-$)
+    \item \emph{elliptic (center)} : all eigenvalues are non null, purely imaginary, and non defective. ($i\R^*$)
+    \item \emph{stable focus (sink)} : all eigenvalues are non null, with negative real part, and non defective. ($\R^*_-+i\R$)
+    \item \emph{saddle} : there exists a real and positive eigenvalue, and a real and negative one, both non defective.
+    \item \emph{hyperbolic} : stable, source, or saddle. i.e. all eigenvalues are real, non null, and non defective.
+    \item \emph{degenerated} : there exists a defective eigenvalue.
+    \end{itemize}
+\end{definition}
+\com{graphiques et présentations des structures possibles des solutions}
+\begin{corollaire}
+\quad
+\begin{itemize} 
+    \item Stables, elliptics, and stables focus linear systems are L-stable.
+    \item Sources, saddles linear systems are not L-stable.
+    \item Stable and stable focus linear systems are globally asymptotically stable.
+    \end{itemize} 
+\end{corollaire}
