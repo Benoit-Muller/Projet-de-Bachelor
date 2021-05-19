@@ -274,9 +274,9 @@ This is the result we wanted in this section. It motivate the categorisation of 
     \com{revoir notation pour ne pas confondre stable et L-stable\dots}
     \item \emph{Source (unstable)} : $-A$ is stable. i.e. all eigenvalues are real, positive, and non defective. ($\R^*_-$)
     \item \emph{elliptic (center)} : all eigenvalues are non null, purely imaginary, and non defective. ($i\R^*$)
-    \item \emph{stable focus (sink)} : all eigenvalues are non null, with negative real part, and non defective. ($\R^*_-+i\R$)
+    \item \emph{stable focus (sink)} : all eigenvalues have negative real part and are non defective. ($\R^*_-+i\R$)
     \item \emph{saddle} : there exists a real and positive eigenvalue, and a real and negative one, both non defective.
-    \item \emph{hyperbolic} : stable, source, or saddle. i.e. all eigenvalues are real, non null, and non defective.
+    \item \emph{hyperbolic} : stable, source, or saddle; \ie all eigenvalues are real, non null, and non defective.
     \item \emph{degenerated} : there exists a defective eigenvalue.
     \end{itemize}
 \end{definition}
@@ -289,3 +289,118 @@ This is the result we wanted in this section. It motivate the categorisation of 
     \item Stable and stable focus linear systems are globally asymptotically stable.
     \end{itemize} 
 \end{corollaire}
+
+All this classification and considerations on the eigenvalues, show us that there exists directions where the trajectories act kind of exponentially, and these are the directions that are linear combinations of some generalised eigenvectors. We present then a separation of the space of solution, which  tell us in some sense where the solutions act like in a sink, a saddle etc.
+\begin{definition}
+For a hyperbolic linear system $\FF(\xx)=A\dotxx$ (negative real part eigenvalues), we define the stable eigenspace, the unstable eigenspace, and the center eigenspace as follows respectively :
+\begin{IEEEeqnarray*}{rCl}
+\E^s &=& \Span \{\Re v\in R^n|\, v\text{ is a generalised eigenvalue of the system with eigenvalue }\l \text{ such that }\Re(\l)<0\} \\
+\E^u &=& \Span\{\Re v\in R^n|\, v\text{ is a generalised eigenvalue of the system with eigenvalue }\l \text{ such that }\Re(\l)>0\}\\
+\E^c &=& \Span\{\Re v\in R^n|\, v\text{ is a generalised eigenvalue of the system with eigenvalue }\l \text{ such that }\Re(\l)=0\}
+\end{IEEEeqnarray*}
+Namely, they are the real parts of the eigenspaces of the stable, unstable, elliptical generalised eigenvectors.
+In the same idea we want to compare them to the directions where the solutions act exponentially or not :
+\begin{IEEEeqnarray*}{rCl}
+V^s &=& \{v\in R^n|\,\exists a,b>0 :\forall t\geq0,\|e^{At}v\| \leq be^{-at}\} 
+\\
+V^u &=& \{v\in R^n|\,\exists a,b>0 :\forall t\leq0, \|e^{At}v\| \leq be^{at}\}
+\\
+V^c &=& \{v\in R^n|\,\forall a>0,\, e^{At}v e^{-a|t|} \to 0\text{ when }|t|\to\infty\}
+\end{IEEEeqnarray*}
+Namely, the spaces where the solutions which actually act axponetially or not.
+
+\begin{remarque}
+We can precise the value of the matrix as an argument when dealing with multiples systems and doesn't use argument when the context is clear. Note that they are all subspaces and $\E^u(A)=\E^s(-A)$ as well as $V^u(A)=V^s(-A)$. Taking $-A$ instead of $A$ correspond actually to inverse time.
+\end{remarque}
+
+\begin{lemme}
+    For $\s\in\{s,u,c\}$, we have the equalities $\E^\s=V^\s$, \com{the direct sum $\R^n = \E^\s\oplus\E^\s\oplus\E^\s$},  and the $\E^\s$ are stable, i.e. $\phi(\E^\s\times\R)=\E^\s$, the solutions stay in the space.
+\end{lemme}
+\begin{proof}
+The invariance of the sets comes from the fact that theses set are subspaces of the space of solutions, indeed if some solutions are independent, they must have always been such like that so, solutions cannot go out of theses eigenspaces.
+
+\com{The direct sum come from the fact that we have a basis of complex generalised eigenvectors. If one of them is not real, it comes with a conjugate which will be in the same $\E^\s$ eigenspace. Hence their sum and their difference are in $\E^\s$ too, namely the real and complex parts.}
+
+First, we prove $\E^\s\subset V^\s$. Each hyperbolic generalised eigensolution associated to a generalised eigenvector $v$, can be written $Re(e^{\d t}p(t))$ for a  polynomial $p$ with complex generalised eigenvector coefficients associated to the same eigenvalue $\d=a+ib$ (a,b scalars).
+
+When $a<0$ ($\E^s$) we can just bound the norm as 
+$$\|\Re(e^{\d t}p(t))\| \leq  \| |e^{\d t}p(t)|\|=\|e^{at} |p(t)|\| \leq e^{ta/2} \max_{t\geq0}\||p(t)|e^{ta/2}\| $$
+The max exists because $p(t)e^{ta/2}\to 0$ when $t\to\infty$ if $a<0$. Then we have $\Re v \in \E^s$ and by arbitrarity of $v$ actually the whole span respect $\E^s\subset V^s$.
+
+We directly obtain the $\E^u(A) = \E^s(-A) \subset V^s(-A) = V^u(A)$ by the remark made above.
+%When $a>0$ ($\E^u$) and $e^{\d t}p(t)$ is real, we have
+%$$\|\Re(e^{\d t}p(t)\| 
+%=e^{at}\|p(t))\| 
+%\geq e^{at}\min_{\R_+}\|p\|$$
+%where the min isn't null otherwise the polynomial would have passed by zero and the trajectory would be identically null.
+%If $e^{\d t}p(t)$ isn't real all along, then actually it is never real, otherwise the trajectory would be entirely real by unicity of trajectories. In particular $e^{ibt}p(t)$ is never real and since $\Re(e^{ibt}p(t))>0$. Then
+%$$\|\Re(e^{\d t}p(t)\| 
+%= e^{at}\|\Re(e^{ibt}p(t)\|
+%\geq e^{at/2} \min_{t\geq0}\|e^{at/2}\Re(e^{ibt}p(t))\| .$$
+%The min exist since 
+%$\|e^{at/2}\Re(e^{ibt}p(t))\|\to \infty$. Indeed $\Re(e^{ibt}p(t))$ couldn't go exponentially to zero since it is constituted of polynimals and trigonometrics terms. The min is non null as we said that $\Re(e^{ibt}p(t))>0$.
+\\ \\
+When $a=0$ ($\E^c$) we have
+$$\|e^{-\a |t|}\Re(e^{\d t}p(t))\|
+= e^{-\a |t|}\|\Re(e^{ibt}p(t))\|
+\leq e^{-\a |t|}\|e^{ibt}p(t)\|
+= e^{-\a |t|}\|p(t)\| \to0 \text{ when }|t|\to\infty.$$
+for any $\a>0$. We get then $\Re v \in \E^c$ and by arbitrarity of $v$ actually the whole span respect $\E^c\subset V^c$. We conclude $\E^\s\subset V^\s$ for $\s=s,u,c$.
+\\ \\
+Secondly, we prove the inverse inclusion.
+Let be $v$ a vector of $V^\s$. It can be written as a linear combination of component in each eigenspace :
+$v = \b_s v_s + \b_u v_u + \b_c v_c$. If $\s=s$, $e^{At}v\to0$ exponentially. But this is yet the case for the direction $v_s$ so $v_u$ and $v_c$ should do the same because they are all independent directions and induce independents trajectories that sum up. From the general form of eigensolutions we see that unstable eigensolutions increase exponentially so  $\b_u=0$, and elliptic eigensolutions doesn't tend to zero, $\b_c=0$. We see that actually $v = \b_s v_s\in \E^s$ and so $V^s\subset \E^s$. As before we directly conclude that $V^u(A)=V^s(-A)\subset \E^s(-A)=\E^u(A)$. Same argument for a $v\in V^c$; looking in positives or negatives times, we see that stable or unstable direction add a exponentially increasing term which must be vanished by a zero coefficient, $v$ is in $\E^c$.
+We have proven the both inclusions and obtain the result.
+\end{proof}
+
+Now that we understand well the eigenspaces of solutions, which satisfy certain stability properties, we see that the eigenspaces seem to act independently from each other and the general comportment of solutions in them, seem to be uniform. But a change of an eigenvalue can change totally the stability of a system. The flow $e^{At}x$ is continuous on $A$, but how does the continuity change along $t$ and $x$? We can show that actually, in the hyperbollic case again, the dimensions of the eigenspaces don't change when we chose a second matrix near enough the first one, the general structure depends continuously on $A$:
+\end{definition}
+
+\begin{theoreme}
+If $A$ is hyperbollic, the map $A\mapsto \text{dim }\E^s(A)$ is continuous, so locally constant.
+\end{theoreme}
+\begin{proof}
+Since no generalised eigenvalue is in the imaginary line, we can separate them in two sets representing the two half planes, and surround each set by a positively oriented smooth closed curve, that doesn't cross any eigenvalue, as well as the imaginary line. We name them $\g_s$ and $\g_u$. Then since the characteristic polynomial $p_A$ vanishes exactly on the eigenvalues, and is holomorphic, we have by the residues that 
+$$\frac{1}{2\pi i}\int_{\g_\s} \frac{p_A'}{p_A}
+= \text{card } (\C_\s\cap p_A^{-1}\{0\}) 
+= \text{dim }\E^\s(A) \text{ \quad for } \s=u,s $$
+with $\C_s$ the open half space $i\R+\R^*_-$ and the other half space $\C_u=-\C_s$. Since the coefficients of $p_A$ are polynomials of the coefficients of $A$, they change conitnuously with $A$. It's a result of complex analysis that the zeros of a polynomial depend continuously on the coefficients of the polynomial and then we can suppose that $A$ varies in a small neighbourhood so $p_A$ still don't vanish in the curves $\g_\s$ (that doesn't change with $A$). As a result, the formula is well defined around $A$ and is continuous with respect to $p_A$ and hence to $A$.
+\end{proof}
+ As we see, the stability structure of the system is the same for matrices in a neighbourhood. But more generally, if two matrices $A$ and $B$ are far from each other, but still have the same dimensions of eigenspaces, do them have similarities? We introduce the following tool of comparison, that match all the trajectories from both system in a continuous way. 
+ \begin{definition}
+ Two flows $\phi$ and $\psi$ on the space $\R^n$, are said \emph{topologically conjugate}, if there exist a homeomorphism $h:\R^n\to\R^n$ such that 
+ $h\circ \phi_t = \psi_t\circ h$, i.e. the image of a trajectory is a trajectory. 
+ \end{definition}
+ \begin{lemme} \label{lem:ps}
+If a matrix is stable with maximum real part of eigenvalues $-a<0$, there exists a scalar product $\ps{.}{.}$ such that $\ps{x}{Ax}<a\|x\|^2$.
+\end{lemme}
+\begin{proof}
+See the ref [.]
+\end{proof}
+\begin{theoreme}[Hartman and Grobman]
+If two hyperbolic linear systems have stable eigenspaces that have the same dimension, then the two flow are topologically conjugate.
+\end{theoreme}
+\begin{proof}
+jrvk
+\end{proof}
+\begin{theoreme}[Linearization]
+    Consider a system $\dotxx=\FF(\xx)$ such that $\FF$ is $C^2$, and $\xx^*$ a fixed point. If the linearized system $\dotxx=D\FF(\xx^*)\xx$ is a sink, then $\xx^*$ is asymptotically stable for the non linear system.
+\end{theoreme}
+\begin{proof}
+If the fixed point is not the origin, we set $\yy=\xx-\xx^*$ which respect $\dotyy=\FF(\xx)=\FF(\yy+\xx^*)$. The flow is just a translation, therefore isometric, and has the corresponding fixed point in the origin. $\F$ is $C^2$, then we can write its Taylor expression around
+$$\FF(\xx)= \FF(0)+D\FF(\xx)\xx + \xx^\top H(\tilde{\xx})\xx =: A\xx + \xx^\top H(\tilde{\xx})\xx.$$
+For a $\tilde{\xx}$ in the segement $[0;\xx]$. We use the special scalar product $\ps{.}{.}_a$ of the \prettyref{lem:ps} and get
+\begin{IEEEeqnarray*}{rCl}
+\ddt \ps{\xx}{\xx}_a
+&=& 2\ps{\xx}{\dotxx}_a
+= 2\ps{\xx}{\FF(\xx)}_a 
+= 2\ps{\xx}{A\xx + \xx^\top H(\tilde{\xx})\xx}_a
+= 2\ps{\xx}{A\xx}_a + 2\ps{\xx}{\xx^\top H(\tilde{\xx})\xx}_a \\
+&\leq& -a\|\xx\|_a^2 + \|\xx\|^3_a\max_{B(0,\|\xx\|_a)} \|H\|_a \\
+&=& \|\xx\|_a^2\underbrace{( \|\xx\|_a\max_{B(0,\|\xx\|_a)}\|H\|_a- a)}_{<0 \text{ for } \|\xx\|_a \text{ small enough}} \\
+&\leq&  -c\|\xx\|_a^2
+\end{IEEEeqnarray*}
+with $c=\e_a\max_{B(0,\e)}\|H\|_a- a$ for a $\e$ small enough and all $\|\xx\|_a<\e$. Then by Grönwal, 
+$$\|\xx\|^2_a \leq \xx(0)e^{-ct}\to0$$
+exponentially when $t\to\infty$ and the system is asymptotically stable.
+\end{proof}

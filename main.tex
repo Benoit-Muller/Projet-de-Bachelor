@@ -25,11 +25,11 @@
 \newrefformat{fig}{Figure~[\ref{#1}]}
 \newrefformat{it}{question~\ref{#1}.}
 \newrefformat{eq}{(\ref{#1})}
-\newrefformat{seq}{Section \ref{#1}}
-\newrefformat{th}{Theorem \ref{#1}}
-\newrefformat{lem}{Lemma \ref{#1}}
-\newrefformat{cor}{Corollary \ref{#1}}
-\newrefformat{rem}{Remark \ref{#1}}
+\newrefformat{seq}{Section~\ref{#1}}
+\newrefformat{th}{Theorem~\ref{#1}}
+\newrefformat{lem}{Lemma~\ref{#1}}
+\newrefformat{cor}{Corollary~\ref{#1}}
+\newrefformat{rem}{Remark~\ref{#1}}
 
 \newtheorem{theoreme}{Theorem} %[section]
 \newtheorem{corollaire}{Corollary} %[theorem]
@@ -67,18 +67,24 @@
 \newcommand{\Pstar}{\P_{**}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\C}{\mathbb{C}}
 \newcommand{\dd}{\mathrm{d}}
 \newcommand{\ddt}{\frac{\dd}{\dd t}}
+\newcommand{\ie}{\emph{i.e.\ }}
+\newcommand{\ps}[2]{\langle #1,#2\rangle}
 
-\newcommand{\com}[1]{\textcolor{ForestGreen}{[ \emph{#1} ]}}
+\DeclareMathOperator{\Span}{Span}
+
+\newcommand{\com}[1]{\textcolor{ForestGreen}{[~\emph{#1}~]}}
 
 
 \pagestyle{fancy}
 \rhead{Chapter \thechapter}
-\lhead{*Lotka–Volterra Equations*}
+\lhead{Stability of Linear Systems and Lotka–Volterra Equations}
 \chead{}
 
-\title{*Lotka–Volterra Equations*}
+\title{Stability of linear systems and Lotka–Volterra Equations}
 \author{Benoît Müller}
 \date{}
 
