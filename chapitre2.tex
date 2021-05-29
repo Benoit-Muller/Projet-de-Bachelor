@@ -1,48 +1,52 @@
-\chapter{Lokta-Voltera equations and consideration on the inter-affections}
-\com{Peut-être split le chapitre en deux}
-\com{premier jet} 
-\\ \\
-The classic model of Lokta-Volterra equations is 
-\[\dot{x}=x(\a-\b y) \quad  \dot{y} = y(-\g + \d x)\]
-where $x$ and $y$ reprensent the size of the population of preys, and predators respectively. The parameters $\a,\b,\g,\d$ are positive scalars. We present a motivation behind this modelisation by showing how we can arrive to this choice of equation:
+\chapter{Lokta-Voltera equations and considerations on the affect of each species}
+
+In this chapter, we present a model for the evolution of the population between preys and predators. For each of the predator and the prey population we define a function that quantify the size of the population with respect to time. The goal is to motivate a choice of differential equations that will describe the interaction and give a possible evolution of the two populations. Lotka-Volterra equations are well known equation in mathematical biology. To get straigth to the point, the equations are
+\[\dot{x}=x(\a-\b y) \quad  \dot{y} = y(-\g + \d x).\]
+where $x$ and $y$ represent the size of the population of preys, and predators respectively. The parameters $\a,\b,\g,\d$ are positive scalars. In the first chapter we presented a pragmatic and mathematical analysis of the linear system. Here, we propose first speak about the qualitative understanding of the equation.We will progressively motivate the choice behind this modelisation by showing equations related to it, and then assert a modification on the equations that will give us more possible euquations but still give the same study as Lotka-Volterra.
 
 \section{Motivation} \label{sec:motiv}
-We remind that for a function $x$ of one variable $t$, 
+We go back to the basics and remind that for a function $x$ of one variable $t$, 
 \[x'(t) = \frac{\dd}{\dd t}x(t) = \dotx(t) \lim_{h\to0}\frac{x(t+h)-x(t)}{h}\] 
-is the derivative when the limit exist. Qualitatively it indicate the amount of change of the function with respect to the variable. This amount is absolute and doesn't depend of the size of x. In consequence, when $x$ is non null which is an assumption we will always make for initial value, $\frac{\dot{x}}{x}$ quantify the relative rate of change of the function, given by the mean number of descendant of a individual. For example if a specie reproduce itself always with the same speed no matter the population or the environment, we can say that their grow rate is a constant c:
+is the derivative when the limit exist. Qualitatively it indicate the amount of change of the function with respect to the variable. This amount is absolute with respect to the size of $x$ and doesn't depend relatively on it. In consequence, when $x$ is non null which is an assumption we will always make for initial value, $\frac{\dot{x}}{x}$ quantify the relative rate of change of the function. This could be in our situation the mean number of descendant of an individual. For example if a specie reproduce itself always with the same speed no matter the population or the environment, we can say that their grow rate is a constant c:
 \[ \dot{x} = cx, \]
 If the population is positive, 
 \[ \frac{\dot{x}}{x} = \frac{d}{dt}(\log{x}) = c \]
 and then by integrating,
 \[ \log{x(t)} = ct + \log{x(0)}, \]
-giving us $x(t) = x(0)e^{ct}$, the exponential growth.
+giving us $x(t) = x(0)e^{ct}$, the exponential growth. This is quite intuitive, if a population double each step time the general formula is of powers of two, the population wil just grow indefinitely. Alternatively if $c$ is taken negative, it mean we have loss of individuals, and the population decrease.
 
-Obviously this is doesn't encapsulate the reality as the function grow very fast forever. The growth rate must decrease as the population increase. This come from multiple complex reasons such as envirenment capacities in food, space etc\dots For now we suppose it is from the simplest form, a linear decrease of this growth rate: 
+Obviously this is doesn't encapsulate the reality as the function grow very fast forever. The growth rate must decrease as the population increase. This come from multiple complex reasons such as environment capacities in food, space etc\dots For now we suppose it is from the simplest form, a linear decrease of this growth rate $\a -\b x$: 
 \[ \dot{x} = x(\a -\b x) \]
-That give us the logistic growth, where $\a$ represent the initial growth rate, and $\b$ change how fast the growth rate slow down as the population size increase. Here we have one non trivial equilibrium when $\dot{x(t)}=0$ i.e. when $x(t)=\a/\b=x_*$. If not, we remark that $\dotx > 0$ when $ x < x_*$, and  $\dotx < 0$ when $ x < x_*$, meaning that $x_*$ seems stable. indeed we do the computations :
+That give us the logistic equation, where $\a$ represent the initial growth rate, and $\b$ how fast the growth rate slow down as the population size increase. Here we have one non trivial equilibrium when $\dot{x(t)}=0$ i.e. when $x(t)=\a/\b=x_*$. If not, we remark that $\dotx > 0$ when $ x < x_*$, and  $\dotx < 0$ when $ x < x_*$, meaning that $x_*$ seems stable. indeed we do the computations :
 \begin{IEEEeqnarray*}{rCl}
-   \frac1\a = \frac{\dotx}{x(1-x/x_*)}
-   = \frac{\dotx}{x} + \frac{\dotx}{(x_* - x)}
-   = (\log|x| + \log|x_* - x|)'.
+   \a = \dotx\frac{x_*}{x(x_*-x)}
+   = \frac{\dotx}{x} + \frac{\dotx}{x_* - x}
+   = (\log x + \log|x_* - x|)'.
 \end{IEEEeqnarray*}
 By integrating from 0 to t we get
-\[ t/\a  = \log(x(t)) - \log|x_* -x(t)| -( \log(x_0) - \log|x_* -x_0|)
+\[ \a t  = \log(x(t)) - \log|x_* -x(t)| -( \log(x_0) - \log|x_* -x_0|)
 = \log \frac{x(t)(x_* -x_0)}{x_0(x_*-x(t))} \]
 and rearranging terms
 \[x(t) = \frac{x_0x_*e^{\a t}}{x_* + x_0(e^{\a t}-1)} \]
-which is well defined for $t\in\R$ if $0<x_0<x_*$, and for $t\in[1/\a \log(1 - x_*/x_0),\infty]$ if $0<x_*<x_0$. We see that in both cases $x(t)\to x_*$ as $t\to\infty$.
+which is well defined for $t\in\R$ if $0<x_0<x_*$, and for $t\in[1/\a \log(1 - x_*/x_0),\infty]$ if $0<x_*<x_0$. We see that in both cases $x(t)\to x_*$ as $t\to\infty$.\com{graphique}
 
 In conclusion for this logistic growth, the population will always stabilise in the direction of a unique non trivial equilibrium.
 
-
-Now we want to introduce a second specie, the predator which alter the growth of the prey population. That mean that the growth rate will decrease in function of the prey, let's say linearly :
+Now we want to introduce a second specie, the predator which alter the growth of the prey population, the same way we made the size of the population itself affect the rate of change. That mean that the growth rate will decrease in function of the prey, let's say linearly :
 \[ \dotx = x(\a -\b y).\]
 In the opposite, the growth rate of the predator increase together with the population. But it decrease without them :
 \[ \doty = x(-\g +\d x).\]
 This is the Lokta-Volterra equations for a prey-predator system.
+When we added the affect of the other species, with didn't keep the affect of the population on itself. We can consider both of these affects and add a term in each growth rate:
+  \begin{equation*}
+    \begin{cases}
+    \dotx &= x(\a -\b y - \m x) \\
+    \doty &= y(-\g +\d x - \n y)
+    \end{cases}
+    \end{equation*}
+Here we are, we obtained the equations we talked about. Let's talk deeply about them and about the possible modifications:
 
-\section{*Le papier sur les phages marins*}
-The idea is that we want to be able to modify the way the size of the species affect the rate. Traditional Lokta-Volterra equation consider the rate of growth as linear in the species. We use then functions $F$ and $G$ that are strictly monotonic,hence bijective, and increase from $0$ to $\infty$ to replace the linearity:
+The idea is that we want to be able to modify the way the size of the species affect the rate. Traditional Lokta-Volterra equation consider the rate of growth as linear with respect to the populations, let's change that. We use functions $F$ and $G$ that are strictly monotonic,hence bijective, and increase from $0$ to $\infty$ to replace the linearity:
 \begin{equation} \label{eq:LV}
     \begin{cases}
     \dotB = F(B)(\a -\b G(\P)) \\
@@ -50,10 +54,16 @@ The idea is that we want to be able to modify the way the size of the species af
     \end{cases}
 \end{equation}
 Here again, $\a,\b,\g,\d$ are positive scalars.
-\\ \\
-We search for non trivial equilibrium where $\dotB=\dotP=0$ :
+Let's consider a real case where these considerations are meaningful:
+
+The paper \cite{Gav} propose marine phages and bacteria. In this case bacteria doesn't seem to be limited by the environment and their size. We can suppose the affect of itself as negligible against the affect of the phages. With the modification, the effective and the physical size of the phage population are not the same. It seem that one of them quantify as the power p of the other. The reason behind this choice is that in the traditional Lotka-Volterra equations, we assume one predator meets one prey at a time. Here laboratory tests tend to say that the important meetings are when two (or maybe three) phages meet a bacteria.
+
+This consideration make the power of $p=2$ appear on the value of the page population in the equation. Indeed we first wanted to wrote $\dotP=\P(-\g+\d B)$ meaning that the amount of change is the interactions between phages and bacteria, something like phages$\times$bacteria. But we need two phages, so something like phages$\times$phages$\times$bacteria which gives $\dotP=\P^2(-\g+\d B)$. A similar thinking motivate the writing of $\dotB=B(\a-\b \P^2)$. In other words, we can say that they are hunting  teams of $p$ phages. For the mathematical study, we will keep general functions F and G that we can change in function of these kind of considerations on the affect.
+
+\section{Mathematical study}
+We have a non trivial equilibrium where $\dotB=\dotP=0$ :
 \[ B_* = F^{-1}(\g/\d) \quad \P_* = G^{-1}(\a/\b)\]
-This let us rewrite \prettyref{eq:LV} using this notation :
+Note that if one of the two populations is constant, then the other must be constant too and they must be in this total equilibrium. Let's rewrite \prettyref{eq:LV} using this notation :
 \begin{equation} \label{eq:LV*}
     \begin{cases}
     \dotB = \b F(B)(G(\P_*) - G(\P)) \\
@@ -78,10 +88,11 @@ V(B,\P) &=& \d \big(-P(B)F(B_*) + B\big)
 &=& V(B(0),\P(0)) \\
 &=:& V_0
 \end{IEEEeqnarray*}
-Now we know then that $(B,\P) \in V^{-1}(\{V_0\})$, a closed set as V is continuous.
-\\
-\com{arguments for the fact that this is a cyclic orbit under asumptions on F and G}
-\\
+Now we know then that $(B,\P) \in V^{-1}(\{V_0\})$, a closed set as V is continuous. To understand the level set, we compute the gradient :
+$$\nabla V(B,\P)
+= \big(\d( -\frac{F(B_*)}{F(B)} + 1) , 
+-\b(\frac{G(\P_*)}{G(\P)}-1)\big)^\top.$$
+It never vanishes, except in the equilibrium and is continuous. As a result, the level set doesn't have interior otherwise the function would be constant and the gradient null. Since we have the local unicity of the solution, the level set is actually a closed line, \ie the solutions are in an closed orbit.
 \com{plot $\to$ \url{https://www.desmos.com/calculator/nqxtcrysok}} .
 Now that we know that it's cyclic with a period $\tau$, we derive a modified Voltera principle by integrating these qualities obtained from \prettyref{eq:LV*} :
 \[ \dotB / F(B) = \b (G(\P_*) - G(\P)). \]
@@ -120,18 +131,71 @@ which give
     \m\g-\d\a &=& \m\d F(B_{**}) - \m\n G(\P_{**}) - \d\m F(B_{**}) -\d\b G(\P_{**}) \\  &=& (-\m\n-\d\b) G(\P_{**}) 
 \end{IEEEeqnarray*}
 and then as $\m\n+\d\b > 0$ and supposing $\a\d>\g\m$
-\[ G(\P_{**}) = \frac{\a\d-\g\m}{\b\d+\n\m} ,\quad
-\P_{**}=P^{-1}\Big(\frac{\a\d-\g\m}{\b\d+\n\m}\Big) \]
+\begin{IEEEeqnarray}{rCl} \label{eq:Pstar}
+G(\P_{**}) = \frac{\a\d-\g\m}{\b\d+\n\m} ,\quad
+\P_{**}=P^{-1}\Big(\frac{\a\d-\g\m}{\b\d+\n\m}\Big)
+\end{IEEEeqnarray}
 Similarly,
-\[ F(B_{**}) = \frac{\b\g+\n\a}{\b\d+\n\m}, \quad
-B_{**} = F^{-1} \Big(\frac{\b\g+\n\a}{\b\d+\n\m}\Big) \]
-Here we cannot derive a first integral like we did in \prettyref{eq:1integral} by separating variables $B$ and $\P$. Instead, we want to test the stability of $(\Bstar,\Pstar)$. For this we develop the theory of stability of Lianupov.
-\\ \\
-Consider a differential equation $\bdotx=\mathbf{F}(\mathbf{x})$, such that there exist a unique solution for each initial point and for all $t\geq0$. Such solutions are denoted by the flow $\phi$, such that $t\mapsto \phi(\mathbf{x}_0,t)$ is the solution initialised at $\mathbf{x}_0$. 
+\begin{IEEEeqnarray}{rCl} \label{eq:Bstar}
+F(B_{**}) = \frac{\b\g+\n\a}{\b\d+\n\m}, \quad
+B_{**} = F^{-1} \Big(\frac{\b\g+\n\a}{\b\d+\n\m}\Big)
+\end{IEEEeqnarray}
+Here we cannot derive a first integral like we did in \prettyref{eq:1integral} by separating variables $B$ and $\P$. Instead, we want to test the stability of $(\Bstar,\Pstar)$. First we can try to use the theorem of linearization to check the possible asymptotic stability of the system.
+\begin{IEEEeqnarray*}{C}
+D_{B,\P} \begin{pmatrix}
+    F(B)(\a -\b G(\P) - \m F(B))\\
+    G(\P)(-\g +\d F(B) - \n G(\P))
+\end{pmatrix} \\
+= \begin{pmatrix}
+    F'(B)(\a -\b G(\P) - \m F(B)) - F(B)\m F'(B)
+    & -F(B)\b G'(\P)
+    \\
+    G(\P)\d F'(B)
+    & G'(\P)(-\g +\d F(B) - \n G(\P))-G(\P)\n G'(\P)
+\end{pmatrix} 
+\end{IEEEeqnarray*}
+We evaluate in the equilibrium and obtain
+$$ \begin{pmatrix}
+     - F(\Bstar)\m F'(\Bstar) & -F(\Bstar)\b G'(\Pstar)
+    \\
+    G(\Pstar)\d F'(\Bstar)   & -G(\Pstar)\n G'(\Pstar)
+\end{pmatrix} $$
+
+Now we could replace $F(\Bstar)$ and $G(\Pstar)$ by their expression \prettyref{eq:Bstar} and \prettyref{eq:Pstar}, and compute the characteristic polynomial. But we would still have the the expressions $F'(\Bstar)$ and $G'(\Pstar)$, that we know to be positive but nothing else. The polynomial isn't in a simple form and the computation of the eigenvalues become excessively cumbersome, because of the number of parameters and the hypothesis on them. More simply we show that a $2\times2$ matrix with the same signs of this one is always stable. Indeed all the factors are positives and we can write the matrix like
+$$\begin{pmatrix}-a&-b\\c&-d\end{pmatrix}$$
+with characteristic polynomial $\l^2+(a+d)\l+ad+bc$ of discriminant $(a+d)^2-4(ad+bc)$. If the discriminant is negative, then the real part of the root will be $-(a+d)/2<0$, and else $$\frac{-(a+d)\pm\sqrt{(a+d)^2-4(ad+bc)}}{2} 
+< \frac{-(a+d) \pm (a+d) }{2} \leq 0$$
+So the eigenvalues are stable and the linearized system too. By the theorem of linearization, the non-linear system is asymptotically stable in the equilibrium. In other words all solutions near enough this point tends to exponentially to it. However, we don't know how big is the basin of attraction.
+
+\begin{comment}
+ We propose here to fix things, we will check numerically for the example and see that even the numerical expression isn't simple. Let's say $F(B)=B$, $G(\P)=\P^2$ and fix arbitrary the parameters making attention to $\a\d>\g\m$. Let's say $\a=4$, $\b=5$, $\m=2$, $\g=1$, $\d=3$, $\n=6$.
+We get then $\Bstar=F(\Bstar)
+= (5\times1+6\times4)/(5\times3+6\times2)
+= 29/27$, 
+$F'(\Bstar)=1$, 
+$\Pstar^2=G(\Pstar)
+= (4\times3-1\times2)/(5\times3+6\times2)
+= 10/27$, 
+$G'(\Pstar)=2\Pstar=2\sqrt{10/27}$. The matrix is then
+$$ \begin{pmatrix}
+     - 29/27*2 & -29/27*5*2\sqrt{10/27}
+    \\
+    10/27*3   & -10/27*6*2\sqrt{10/27}
+\end{pmatrix} 
+= \begin{pmatrix}
+    -58/27 & -290 \sqrt{10/3}/81 \\ 10/9 & -40\sqrt{10/3}/27
+\end{pmatrix} 
+$$
+with the eigenvalues 
+$$\l_1=\frac{1}{243} \big(-3 (87 + 20 \sqrt{30}) + 3 i \sqrt{3 (-6523 + 4060 \sqrt{30})}\big) 
+\quad \text{ and } \quad \l_2=\bar{\l}_1.$$
+We have then an stable linearized system
+\end{comment}
+For this we develop the theory of stability of Lianupov. Consider a differential equation $\bdotx=\mathbf{F}(\mathbf{x})$, such that there exist a unique solution for each initial point and for all $t\geq0$. Such solutions are denoted by the flow $\phi$, such that $t\mapsto \phi(\mathbf{x}_0,t)$ is the solution initialised at $\mathbf{x}_0$. We recall the following definitions
 
 \begin{definition}
  A fixed point $\mathbf{x}_*$ of  is said \emph{Lyanupov stable} or \emph{L-stable} if 
- for all $\epsilon>0$, there exists a $\delta>0$ s.t. for all $\mathbf{x_0}$ and for all $t>0$, $\|\mathbf{x_0} - \mathbf{x}_*\| < \delta$ implies $\|\phi(\mathbf{x_0},t) - \mathbf{x}_*\| < \epsilon$.
+ for all $\epsilon>0$, there exists a $\delta>0$ such that for all $\mathbf{x_0}$ and for all $t\geq0$, $\|\mathbf{x_0} - \mathbf{x}_*\| < \delta$ implies $\|\phi(\mathbf{x_0},t) - \mathbf{x}_*\| < \epsilon$.
 \end{definition}
 
 \begin{definition}
@@ -143,9 +207,7 @@ A fixed point $\mathbf{x}_*$ of  is said \emph{attracting} if there exists a $\d
 \end{definition}
 
 \begin{remarque}
-Note that these two notions are different. For an example of non-attracting point which is L-stable, we can take simply $F(x)=0$ or for a non trivial case, we can take $\dotx = -y$, $\dot{y} = x$ who describe the circle trajectories $x(t)=cos(t)$, $y(t)=sin(t)$.
-
-In the other way there exist non L-stable points which are attracting. Such a point is the limit of all near trajectories but they always go far before converging, like a detour. For this we place our-self in polar coordinates. We want the trajectories to follow the circle and finish in $(1,0)$ for this we make the $\theta$ always go and stop to $2\pi$, and $r$ go and stop to 1. For this we can write $(\dot{r},\dot{\theta})=(1-r,2\pi-\theta) = G(r,\theta)$. But if we want $(G_1\cos(G_2),G_1\sin(G_2))$ to be continuous on $\R_+\times 0$, we should write $\dot{r} = r(1-r)$, $\dot{\theta} = \theta(2\pi-\theta)$. And to obtain the continuity of the derivative, in purpose to have a flow, we should write $\dot{r} = r(1-r^2)$, $\dot{\theta} = \theta(2\pi-\theta^2)$. This gives us what we need but to be able to explicitly change the coordinates into cartesian, we prefer $\dot{y} = \sin(\theta/2)^2$.
+We remind that have shown that these two notions are different in \prettyref{rem:stabilité}.
 \end{remarque}
 
 Now we can introduce a tool that will be useful to understand the limit comportment of the trajectories and will a tool to proove asymptotic stability.
@@ -155,10 +217,10 @@ Now we can introduce a tool that will be useful to understand the limit comportm
     \\
     The function $L$ is called a \emph{weak Lyanupov function} if \[L(\mathbf{x})>L(\mathbf{x}_*)\] 
     and 
-    \[ \dot{L}(\xx):=\frac{\dd}{\dd t}L(\phi(\mathbf{x},0)) \leq 0 \]
+    \[ \dot{L}(\xx):=\frac{\dd}{\dd t}L(\phi(\mathbf{x},t))|_{t=0} \leq 0 \]
     for all $\mathbf{x}$ in $U$.
     \\
-    The function $L$ is called a \emph{Lyanupov function} (or a \emph{strict Lyanupov function}) provided that we have the strict inequality $\dot{L}(\xx) < 0$ when $\xx\neq\xx_*$ and equality $\dot{L}(\xx_*) = 0$ (In this case we say that $\dot{L}$ is semipositive definite in $\xx_*$, and $L(\mathbf{x})>L(\mathbf{x}_*)$ guarantee anyway).
+    The function $L$ is called a \emph{Lyanupov function} (or a \emph{strict Lyanupov function}) provided that we have the strict inequality $\dot{L}(\xx) < 0$ when $\xx\neq\xx_*$ (For this condition we say that $\dot{L}$ is semipositive definite in $\xx_*$ and it guarantee automatically $L(\mathbf{x})>L(\mathbf{x}_*)$.).
 \end{definition}
 
 \begin{theoreme} \label{th:Lianupov}
@@ -166,10 +228,10 @@ Let $\mathbf{x}_*$ a fixed point of the differential equation $\bdotx = \mathbf{
 \end{theoreme}
 \begin{proof}
 L-stable: Let's suppose first that $L$ is a weak Lyanupov function. Since $\dot{L}(\xx) \leq 0$, $L(\xx)$ is decreasing. Let be $\epsilon>0$. Up to taking it smaller, we suppose $B(\xx_*,\epsilon) \subset U$. But $L$ is continuous and $\partial B(\xx_*,\epsilon)$ is compact, we can then define
-\[m=\min_{\partial B(\xx_*,\d)}{L} \; \geq \; L(\xx_*),\]
-and since $L$ is continuous, there exists a $\epsilon>\d>0$ such that $L(\xx)<m$ when $\|\xx-\xx_*\|<\d$. Now, for all $\xx\in B(\xx_*,\d) \subset B(\xx_*,\epsilon)$, $L(\xx)<m$ mean that $\phi(x,t)$ cannot go out of $B(\xx_*,\epsilon)$, otherwise it would cross $\partial B(\xx_*,\epsilon)$ in a certain $t>0$, and  we would have the contradiction $m<L(\xx)=L(\phi(\xx,0)) \geq L(\phi(\xx,t)) \geq m$. Whave the L-stability.
+\[m=\min_{\partial B(\xx_*,\e)}{L} \; \geq \; L(\xx_*),\]
+and since $L$ is continuous, there exists a $\epsilon>\d>0$ such that $L(\xx)<m$ when $\|\xx-\xx_*\|<\d$. Now, for all $\xx\in B(\xx_*,\d) \subset B(\xx_*,\epsilon)$, $L(\xx)<m$ mean that $\phi(x,t)$ cannot go out of $B(\xx_*,\epsilon)$, otherwise it would cross $\partial B(\xx_*,\epsilon)$ in a certain $t>0$, and  we would have the contradiction $m>L(\xx)=L(\phi(\xx,0)) \geq L(\phi(\xx,t)) \geq m$. Whave the L-stability.
 
-Attracting: Since $L(\xx)$ is decreasing and bounded below $L(\xx_*)$, $L(\xx(t))$ must have a limit when $t\to\infty$, let's say $L_{\infty}$. This implies that $\dot{L}(\xx(t)) \to 0$. Using first part, let be $\d_2>0$ such that for all $\xx$ in $B(\xx_*,\d_2)$, and for all $t>0$, $\phi(\xx,t) \in B(\xx_*,\epsilon)$. Now since $\phi(\xx,t)$ stay in a compact, there exists an accumulation point $\zz$ and a sequence $(t_n)_n$ growing to infinity such that $\lim_{n\to\infty} \phi(\xx,t_n) = \zz$. Because $\dot{L}$ is continuous, the limit $\lim_{n\to\infty} \dot{L}(\phi(\xx,t_n)) =0$ is actually $\dot{L}(\zz)$ and by hypothesis, $\zz$ must be $\xx_*$. Now because of the first part, as $\phi(\xx,t_n)$ approaches $\xx_*$, when $n$ is big enough $\phi(\xx,t)$ will stay arbitrarily near from $\xx_*$, assuring the convergence for all $t\to\infty$, and $\xx_*$ is attracting.
+Attracting when strict Lyanupov: Since $L(\xx)$ is decreasing and bounded over $L(\xx_*)$, $L(\xx(t))$ must have a limit when $t\to\infty$, let's say $L_{\infty}$. This implies that $\dot{L}(\xx(t)) \to 0$. Using first part, let be $\d_2>0$ such that for all $\xx$ in $B(\xx_*,\d_2)$, and for all $t>0$, $\phi(\xx,t) \in B(\xx_*,\epsilon)$. Now since $\phi(\xx,t)$ stay in a compact, there exists an accumulation point $\zz$ and a sequence $(t_n)_n$ growing to infinity such that $\lim_{n\to\infty} \phi(\xx,t_n) = \zz$. Because $\dot{L}$ is continuous, the limit $\lim_{n\to\infty} \dot{L}(\phi(\xx,t_n)) =0$ is actually $\dot{L}(\zz)$ and by hypothesis, $\zz$ must be $\xx_*$. Now because of the first part, as $\phi(\xx,t_n)$ approaches $\xx_*=\zz$, when $n$ is big enough $\phi(\xx,t)$ will be arbitrarily near from $\xx_*$ for all $t>t_n$, assuring the convergence for all $t\to\infty$, and $\xx_*$ is attracting.
 
 from the two last parts we conclude that $\xx_*$ is asymptotically stable.
 \end{proof}
@@ -202,21 +264,21 @@ We compute its derivative along a solution $(B,\P)$:
 &=& -\d\m\Delta^2_F - \b\n\Delta^2_G
 \end{IEEEeqnarray*}
 with $\Delta_F= F(B)-F(\Bstar)$ and 
-$\Delta_G= G(\P)-G(\Pstar)$. As a result, $\dot{W}(B,\P)$ is null only on $(\Bstar,\Pstar)$, otherwise it is strictly negative on $U=(\R^*_+)^2 \backslash\{(\Bstar,\Pstar)\}$. This is a Lyanupov function and thus, $(\Bstar,\Pstar)$ is asymptotically stable.  
+$\Delta_G= G(\P)-G(\Pstar)$. As a result, $\dot{W}(B,\P)$ is null only on $(\Bstar,\Pstar)$, otherwise it is strictly negative on $U=(\R^*_+)^2 \backslash\{(\Bstar,\Pstar)\}$. This is a Lyanupov function and thus, $(\Bstar,\Pstar)$ is asymptotically stable. \com{graphic of W as potential energy}
 \\ \\
-For now, we don't know that if trajectories goes to $(\Bstar,\Pstar)$ independently of the initial point. We would like to prove a global convergence result. First we define the notion: 
+For now, we don't know that if trajectories goes to $(\Bstar,\Pstar)$ independently of the initial point. We would like to prove a global convergence result. First we recall the notion: 
 \begin{definition}
     A fixed point $\xx_*$ of $\bdotx=\mathbf{F}(\mathbf{x})$ is said \emph{globally attractive} on a set $U$, if for all $\mathbf{x_0}\in U$, $\phi(\mathbf{x_0},t) \to \mathbf{x}_*$ as $t \to\infty$. In other words it is attractive without condition on the proximity of the initial point.
 \end{definition}
 \begin{definition}
     A fixed point $\xx_*$ of $\bdotx=\mathbf{F}(\mathbf{x})$ is said \emph{globally asymptotically stable} on a set $U$, if it is globally attractive and L-stable. In other words it is asymptotically stable without condition on the proximity of the initial point for the convergence.
 \end{definition}
-Now, if we look at our proof of \prettyref{th:Lianupov} on Lianupov functions, we see that the proximity that we needed to obtain convergence, was just in purpose to have a compact and invariant[to define] set. Without loss of generality we can take the $\d_2$ as big as we want, as long as $\phi(B(\xx_*,\d_2)\times\R_+)$ is bounded in $U$. A criteria on the boundedness of $L^{-1}([L(\xx_*),L_0])$ will help us to obtain global attractivity :
-\begin{theoreme}
+Now, if we look at our proof of \prettyref{th:Lianupov} on Lianupov functions, we see that the proximity that we needed to obtain convergence, was just in purpose to have a compact and invariant set. Without loss of generality we can take the $\d_2$ as big as we want, as long as $\phi(B(\xx_*,\d_2)\times\R_+)$ is bounded in $U$. A criteria on the boundedness of $L^{-1}([L(\xx_*),L_0])$ will help us to obtain global attractivity :
+\begin{corollaire}
 Under the suppositions of \prettyref{th:Lianupov}, if we have in addition that for a scalar $L_0>L(\xx_*)$,
 \[ U_{L_0} = \{ \xx\in U | L(\xx) \leq L_0\} = L^{-1}\big([L(\xx_*);L_0]\big) \]
 is bounded and whose closure is contained in $U$, then $\xx_*$ is globally asymptotically stable on $U_{L_0}$.
-\end{theoreme}
+\end{corollaire}
 \begin{proof}
 First of all, $U_{L_0}$ is closed in the topology of $U$ because of the continuity of $L$. But since its euclidean closure is in U, it's actually closed in the all space. In addition, it is bounded, and thus, compact. Finally, all $\phi(\xx,0)$ in $U_{L_0}$ will stay in $U_{L_0}$, because of the monotonicity of $L(\phi(\xx,t))$ and we have the convergence by the same argument of \prettyref{th:Lianupov}, i.e. $L(\phi(\xx,t))\to L_\infty$, $\dot{L}(\phi(\xx,t))\to 0$, $\phi(\xx,t_n)\to \zz$ (because of the compacity of $U_{L_0}$), $\zz=\xx_*$, and $\phi(\xx,t)\to \xx_*$. This assure the global attractivity of $\xx_*$ on $U_{L_0}$, and hence, the global asymptotic stability, since the L-stability was assured yet.
 \end{proof}
@@ -227,4 +289,4 @@ If the hypothesis is true for all $L_0>L(\xx_*)$ then it is actually globally as
 We recall that our Lyanupov function is 
 \[W(B,\P) = \d \big(-P(B)F(\Bstar) + B\big) 
 -\b\big(Q(\P) G(\Pstar)-\P\big)\]
-and is defined in $(\R^*_+)^2$. For all $W_0>W(\Bstar,\Pstar)$, under the condition that \com{assumptions on $F$ and $G$ for divergence of $W$ when $B$ or $\P$ tends to o or $\infty$}, $W^{-1}([W(B_*,\P_*);W_0])$ must be bounded, and then $(B_*,\P_*)$ is globally asymptotically stable.
+and is defined in $(\R^*_+)^2$. For all $W_0>W(\Bstar,\Pstar)$, under the condition that \com{assumptions on $F$ and $G$ for divergence of $W$ when $B$ or $\P$ tends to o or $\infty$}, $W$ tends to infinity when $B$ or $\P$ tends to infinity, so $W^{-1}([W(B_*,\P_*);W_0])$ must be bounded, and then $(B_*,\P_*)$ is globally asymptotically stable on the positive quadrant.

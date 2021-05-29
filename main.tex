@@ -17,6 +17,7 @@
 %\usepackage{subfig} % pour les doubles figures
 \usepackage{float} % pour bien positionner les figures
 \usepackage[dvipsnames]{xcolor} % pour la couleur du texte et de la page
+\usepackage{comment} %pour les blocs de commentaires
 \usepackage{biblatex} % bibliographie
 \usepackage{csquotes} % pour que la biblio s'adapte à la langue
 \usepackage{prettyref}
@@ -36,6 +37,7 @@
 \newtheorem{lemme}{Lemma} %[theorem]
 \theoremstyle{definition}
     \newtheorem{definition}{Definition} %[section]
+    \newtheorem*{exemple}{Example}
 \theoremstyle{remark}
      \newtheorem*{remarque}{Remark}
 
@@ -50,6 +52,7 @@
 \newcommand{\s}{\sigma}
 \newcommand{\e}{\epsilon}
 \newcommand{\dotx}{\dot{x}}
+\newcommand{\doty}{\dot{y}}
 \newcommand{\bdotx}{\dot{\mathbf{x}}}
 \newcommand{\dotxx}{\dot{\mathbf{x}}}
 \newcommand{\dotyy}{\dot{\mathbf{y}}}
@@ -60,7 +63,6 @@
 \newcommand{\zz}{\mathbf{z}}
 \newcommand{\FF}{\mathbf{F}}
 \newcommand{\ww}{\mathbf{w}}
-\newcommand{\doty}{\dot{y}}
 \newcommand{\dotB}{\dot{B}}
 \newcommand{\dotP}{\dot{\P}}
 \newcommand{\Bstar}{B_{**}}
@@ -72,7 +74,8 @@
 \newcommand{\dd}{\mathrm{d}}
 \newcommand{\ddt}{\frac{\dd}{\dd t}}
 \newcommand{\ie}{\emph{i.e.\ }}
-\newcommand{\ps}[2]{\langle #1,#2\rangle}
+\newcommand{\ps}[2]{\langle#1,#2\rangle}
+\newcommand{\LV}{Lotka-Volterra}
 
 \DeclareMathOperator{\Span}{Span}
 
@@ -81,10 +84,10 @@
 
 \pagestyle{fancy}
 \rhead{Chapter \thechapter}
-\lhead{Stability of Linear Systems and Lotka–Volterra Equations}
+\lhead{Stability of Linear Systems and Lotka-Volterra Equations}
 \chead{}
 
-\title{Stability of linear systems and Lotka–Volterra Equations}
+\title{Stability of linear systems and Lotka-Volterra Equations}
 \author{Benoît Müller}
 \date{}
 
@@ -95,7 +98,7 @@
     \tableofcontents
     
     \include{chapitre1}
-    %\include{chapitre2}
+    \include{chapitre2}
     %\include{chapitre3} 
     
     \nocite{*}
