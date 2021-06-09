@@ -1,6 +1,78 @@
-\chapter{*Modelisation about Covid-19*}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.
+\chapter{Modelisation about Covid-19}
+In the last chapter, we gained a good intuition how and why \LV equations model population interactions. We have seen what are the effects of adding terms in the growth rate of a equation. We recall that the general understanding of growth rate of a scalar function $x_j$ is $\dot{x}_j/x_j$ when $x_j\neq0$. This is mostly interesting when we have to deal with a equation of the form $\dot{x}_j=x_jf(x)$, because the growth rate is just $f(x)$. We would like to use these ideas of the second chapter to elaborate an equation that would simulate a pandemic. We do not have the audacity to say that the model will be a perfect modelisation of the problem and that it will even predict the future. It's actually not the goal, our main goal is to learn how to create a differential equation so that it fit the kind of comportment we need. The biological context is a pretext, the definition of a particular situation, which determine the qualitative considerations that our final solution will satisfy.
+\section{Quantities and considerations}
+First we present the quantities we will have to deal with and link together with differential equations. We suppose we have a population of a size $P$ that will be confronted to a virus. The general idea is that the virus is the predator and the people are the prey. We have a number $V$ of vulnerable people that have never been infected. We could have set a variable for virus but there is no such idea of quantity of virus, so we consider that infected people become part of the predators, and we set a number $I$ of people that are infected. As it is the case most of the time for virus, there is a phenomena of immunity (at least partial) that follow an infection. As a result, the number $R$ of resistant people is the number of people that have been infected in the past. We choose the case where infected people are mostly immediately infectious after infection, so $V$ is the number of infectious people too.
 
-Ut velit mauris, egestas sed, gravida nec, ornare ut, mi. Aenean ut orci vel massa suscipit pulvinar. Nulla sollicitudin. Fusce varius, ligula non tempus aliquam, nunc turpis ullamcorper nibh, in tempus sapien eros vitae ligula. Pellentesque rhoncus nunc et augue. Integer id felis. Curabitur aliquet pellentesque diam. Integer quis metus vitae elit lobortis egestas. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi vel erat non mauris convallis vehicula. Nulla et sapien. Integer tortor tellus, aliquam faucibus, convallis id, congue eu, quam. Mauris ullamcorper felis vitae erat. Proin feugiat, augue non elementum posuere, metus purus iaculis lectus, et tristique ligula justo vitae magna.
+In conclusion we have a population $P$ where each person can successively belong to each of the three parts $V$, $I$, and $R$. In other words we have $V+I+R=P$ and the scheme is $V\to I\to R$.
+As the number of people is supposed to be big, we can use real variable for all these quantities even if the populations are integers, and we make them vary along the free variable of time.
 
-Aliquam convallis sollicitudin purus. Praesent aliquam, enim at fermentum mollis, ligula massa adipiscing nisl, ac euismod nibh nisl eu lectus. Fusce vulputate sem at sapien. Vivamus leo. Aliquam euismod libero eu enim. Nulla nec felis sed leo placerat imperdiet. Aenean suscipit nulla in justo. Suspendisse cursus rutrum augue. Nulla tincidunt tincidunt mi. Curabitur iaculis, lorem vel rhoncus faucibus, felis magna fermentum augue, et ultricies lacus lorem varius purus. Curabitur eu amet.
+\section{The models}
+\subsection{A \LV approach} \label{sec:premier-modèle}
+We want to use the \LV model, just like if infected people where the predators of the vulnerable ones. The general form of this system is 
+\begin{IEEEeqnarray*}{rCl}
+    \dotV&=&V(\a+\b I) \\
+    \dotI&=&I(\g+\d V).
+\end{IEEEeqnarray*}
+But what are the sign of the scalars? If there is no (-more) infected, $I=0$ and $0=\dotV=\a V$ implies that $\a=0$. The parameter $\b$ represent how the infected affect the vulnerable people. It's then negative because more infected implies less vulnerable. More precisely, if the mean number of contacts of a person is $\mu$ then the mean of infection by unit of time is $\mu$ times the proportion of infected, $I/P$. This give indeed a term $\mu/PI=-\b I$. For the second equality, the rate of infected contain a term for the people that add from the vulnerable group, $ -\b I$, and $\d=\b$. The other term models the people that are leaving the infected group for the resistant one. We can suppose that the period of infectivity is significantly smaller than the velocity of the pandemic, namely the change of size of the groups. So the number of people that leave the infected group at a time $t$ is the same as the number of people that was going into it a bit sooner. We can suppose that in average, a fraction of the infected group leave it and so it give a term $\g I$ with $\g<0$. With all these considerations we rename the paramters and take them all positive so we can write 
+\begin{IEEEeqnarray}{rCl} \label{eq:LV-virus}
+    \dotV&=&-\b VI \\
+    \dotI&=&I(-\a+\b V).
+\end{IEEEeqnarray}
+We would like the resistant group to have the same oppostite rate as the term $-\a I$ that represent people leaving the infected group. So we have $\dotR=\a R$. We see that all of this seem coherent since $$(V+I+R)'=\dotV+\dotI+\dotR=-\b VI + I(-\a+\b V) + \a R =0$$
+and the population is always conserved.
+
+There is no isolated fixed point of the system \prettyref{eq:LV-virus}, but all the axis where $I=0$ is fixed. This show that once the virus is eradicate there is no more change. Here, the fixed axis $I=0$ will introduce a zero eigenvalue in the linearization, and we cannot use the theorem of linearization because we need stable eigenvalues. More than that, because the fixed points are not isolated, it implies that they are not asymptotically stable because there exists non convergent solutions that start as near as we want. Instead of this method, we will use first integrals, \ie constant quantities along time. We consider the system terminated if $I$ or $V$ reach zero. 
+The function $V$ is decreasing, and $I$ change of direction when $V$ passes $\a/\b$. We try to obtain a first integral like in the second chapter by separating the variables. Supposing $I\neq0\neq V$, we take the cross product of 
+\begin{IEEEeqnarray*}{rCl}
+    \frac{\dotV}{V}&=&-\b I \\
+   \frac{\dotI}{I}&=&-\a+\b V.
+\end{IEEEeqnarray*}
+and obtain 
+$$0 = \frac{\dotV}{V}(-\a+\b V) + \b\dotI 
+=  \dotV(-\frac{\a}{V}+\b) + \b\dotI
+= (-\a\log(V)+\b V + \b I)',$$
+so we have the constant quantity 
+$$L(V):=-\a\log(V)+\b V + \b I = -\a\log(V_0)+\b V_0 + \b I_0$$
+$$0=-\a\log(\frac{V}{V_0})+\b (V-V_0) + \b (I-I_0)$$
+and an explicit form for the curve : 
+\begin{equation} \label{eq:LV-virus-curve}
+    I= \frac{\a}{\b}\log(\frac{V}{V_0})- (V-V_0) + I_0
+= \frac{\a}{\b}\log(\frac{V}{V_0})- V + P.
+\end{equation}
+Since its derivative is negative, $V$ is decreasing and positive so it has a limit $V_\infty$. Taking the limit of the expression we just get when time goes to infinity, we see that since $I$ is bounded by $P$, $V$ cannot goes to zero, and $V_\infty>0$. For $I$, we see that $(I+V)'=-\a I\leq0$ so similarly the positive quantity $I+V$ must converge, and its derivative must converge to zero, so $I=(I+V)'/\a\to0$. As a result, we can now take the limit of \prettyref{eq:LV-virus-curve} and get
+$$0= \frac{\a}{\b}\log(\frac{V_\infty}{V_0})- V_\infty + P.$$
+We show that we always have a point $V_\infty$ such that this is satisfied. Indeed $L(V)-L(0)\to-\infty$ when $V\to0$ and $$L(P)-L(0) = \frac{\a}{\b}\log(\frac{P}{V_0})\geq\frac{\a}{\b}\log(1)=0.$$
+Moreover, $$\frac{d}{dV}(L(V)-L(0))=\frac{\a}{\b}\frac{1}{V}- 1$$
+changes sign only one time in $V=\frac{\a}{\b}$ where there is a max, so if there is two zeros, $P$ must be between them and there is exactly one zero such that $V_\infty\leq R$. The max of $I$ is
+$$I_{max}=L(\a/\b)-L(0) = \frac{\a}{\b}(\log(\frac{\a}{\b V_0})-1) + P$$
+All in all, we have a pandemic (the number of infected increase) if and only if $V_0>\a/\b$, and in this case the infected group increase to $I_{max}$, before to go down to zero, and there will be $V_\infty>0$ people that will never have been infected. \com{plot : \url{https://www.desmos.com/calculator/6f6ckglq1w}}
+
+\subsection{Inclusion of the vaccine in the equation}
+In this section, we modify our first model such that it include a group that has a better immunity against the virus than vulnerable people, but has never had been infected. For this we need to make two version of $V$ and $I$ depending if the people are vaccinated or not. For this we index them by $v$ (vaccinated) and $u$ (unvaccinated): $V_u,V_v,I_u,I_v$. In the first section, we have use parameters $\a$ and $\b$ to quantify the affect of the virus. Now, the vaccine have an effect on that, and reduce the susceptibility to infection, let's say it reduces by a factor $\e$ the capacity of the vulnerable group to be infected by a infectious; it reduces by a factor $\d$ the capacity of the infected group to  infect a vulnerable one; it increase by a factor $\s$ the capacity of the infected group to recover and become resistant. Using our understanding of each term of the equation in section 1, we establish a new equation and detail it after for clarity :
+\begin{IEEEeqnarray*}{rCl}
+\dotV_u &=& -\b V_u(I_u+\e I_v) \\
+\dotV_v &=& -\d\b V_v(I_u+\e I_v) \\
+\dotI_u &=& \b V_u(I_u+\e I_v) -\a I_u \\
+\dotI_v &=& \d\b V_v(I_u+\e I_v) -\s\a I_v. \\
+\end{IEEEeqnarray*}
+Here again, we use the concept of growth rate to decide the equation. The growth rate of the two vulnerable groups can be separated in two terms that represent the interactions with the vaccinated and unvaccinated infectious group. We have to take into account the fact that the vaccinated infectious group has an effect reduced by a factor $\e$ and that the vaccinated vulnerable group has a vulnerability reduced by a factor $\d$. These two terms sum up and combine the two new factors, which justify the first two lines of the system. For the two last equations, we first have to add the term of people who leave the respective vulnerable group depending if they have vaccine or not. Then we have to add the term that represent the people that leave the infected group to become resistant. It is of the same form as before, but with a factor augmentation for the vaccinated ones. The general equation for the evolution of $R$ is just the sum of the two terms we just described, it is $\dotR=-\a I_u-\s\a I_v$. As wanted, the total population $P=V_u+V_v+I_u+I_v+R$ is constant because as before, everything vanishes in $(V_u+I_u+I_v+V_v+R)'=0$.
+
+Now we try to do the same analysis as before. We have again for the set of fixed points, the 2 dimensional subspace where $I_u=I_v=0$, and we don't have asymptotic stability on them. The constant quantity of motion doesn't come easily as before, but we see similarities. The $V$'s are decreasing, and the $I$'s may change direction during the process. We want to integrate the first two equations because we can separate at least the $V'$s from the other functions. Using $\a_v=\s\a$, $\a_u=\a$, $\b_v=\d\b$ ($\b_u=\b$), and a index $w$ that go through $\{u,v\}$,  we see that again, $(V_w+I_w)'=\a_w I_w$. We get 
+\begin{IEEEeqnarray*}{rCl}
+(\log V_w)' 
+&=& \frac{\dotV_w}{V_w} 
+= -\b_w(I_u+\e I_v)
+= -\b_w(\frac{(V_u+I_u)'}{\a_u}+\e \frac{(V_v+I_v)'}{\a_v}) \\
+&=& \bigg(-\b_w\Big(\frac{1}{\a_u}(V_u+I_u)+ \frac{\e}{\a_v}(V_v+I_v)\Big)\bigg)'
+\end{IEEEeqnarray*}
+This gives us a pair of constant quantities
+\begin{equation} \label{eq:modèle-1-const}
+    L_w(V_u,V_v,I_u,I_v)=\log V_w + \b_w\Big(\frac{1}{\a_u}(V_u+I_u)+ \frac{\e}{\a_v}(V_v+I_v)\Big).\end{equation}
+We take a linear combination of them to make the second term disapear and obtain that $\d\log V_u - \log V_v$
+is constant too, so $V_v= \frac{V_v(0)}{V_u(0)^\d}V_u^\d$. This show how the vaccine affect the vulnerable group depending on if they are vaccinated or not. Like in the first model in \prettyref{sec:premier-modèle}, $(V_w+I_w)'=\a_w I_w$ implies that $I_w$ tends to zero and $V_w$ tends to a positive value $_w(\infty)$. We take the limit of the pair of constant quantity \prettyref{eq:modèle-1-const} and obtain
+$$L_0
+= \log V_w(\infty) + \b_w\Big(\frac{1}{\a_u}V_u(\infty)+ \frac{\e}{\a_v}V_v(\infty)\Big)$$
+We can substitute the relation $V_v= \frac{V_v(0)}{V_u(0)^\d}V_u^\d$ into it to obtain a implicit formula for these limit values. It has the same form as in the first model and a similar resolution.
+
+In the last two sections, we have not been able to investigate the stability. Without doing an mathematical analysis, we can intuitively see that the scheme $V \to I \to R$ we choose, cannot give a equilibrium, because $V$ is monotone. People only leave the vulnerable group, but nobody enter it. A possible model to investigate that would allow to have a balance between input and output, and a possible equilibrium, is a demographic model where births and deaths are included in the modelisation as well as immigration and emigration.
+%For this reason, we decide to consider a model that take into account the births and the deaths.  We consider that the "velocity" of the epidemic is slow enough to have interaction with the renewal of the population. In addition, we can consider the epidemic as located in an isolated place, and that the immigration and emigration are considered the same as birth and death. Immigration is initially vulnerable.

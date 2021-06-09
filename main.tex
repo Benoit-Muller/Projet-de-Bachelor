@@ -65,6 +65,9 @@
 \newcommand{\ww}{\mathbf{w}}
 \newcommand{\dotB}{\dot{B}}
 \newcommand{\dotP}{\dot{\P}}
+\newcommand{\dotI}{\dot{I}}
+\newcommand{\dotV}{\dot{V}}
+\newcommand{\dotR}{\dot{R}}
 \newcommand{\Bstar}{B_{**}}
 \newcommand{\Pstar}{\P_{**}}
 \newcommand{\R}{\mathbb{R}}
@@ -75,7 +78,7 @@
 \newcommand{\ddt}{\frac{\dd}{\dd t}}
 \newcommand{\ie}{\emph{i.e.\ }}
 \newcommand{\ps}[2]{\langle#1,#2\rangle}
-\newcommand{\LV}{Lotka-Volterra}
+\newcommand{\LV}{Lotka-Volterra }
 
 \DeclareMathOperator{\Span}{Span}
 
@@ -84,22 +87,26 @@
 
 \pagestyle{fancy}
 \rhead{Chapter \thechapter}
-\lhead{Stability of Linear Systems and Lotka-Volterra Equations}
+\lhead{Stability of linear dynamic systems and Lotka-Volterra equations}
 \chead{}
 
-\title{Stability of linear systems and Lotka-Volterra Equations}
-\author{Benoît Müller}
-\date{}
+\title{\includegraphics[scale=0.15]{images/EPFL-logo.png} \\ Stability of linear dynamical systems and links to Lotka-Volterra equations and epidemics}
+\author{Benoît Müller \\ \\
+Semester project for a bachelor of mathematics \\ in École Polytechnique Fédérale de Lausanne \\ \\
+Supervisor: Joachim Krieger \\
+Co-supervisor: Shengquan Xiang }
+\date{Spring 2021}
 
 \addbibresource{biblio.bib}
 
 \begin{document}
     \maketitle
+    \include{abstract}
     \tableofcontents
-    
+    \include{intro}
     \include{chapitre1}
     \include{chapitre2}
-    %\include{chapitre3} 
+    \include{chapitre3} 
     
     \nocite{*}
     \printbibliography

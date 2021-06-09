@@ -1,62 +1,64 @@
-\chapter{Linear Dynamic Systems and Stability}
-In this chapter,we study explicit autonomous ordinary differential equations of first order that are linear, namely equations of the form 
+\chapter{Linear dynamic systems and stability}
+In this chapter, we study explicit autonomous ordinary differential equations of first order that are linear, namely equations of the form 
 \[\dotxx=A\xx\]
 where $A$ is a $n\times n$ matrix and $\xx$ is a differentiable function from a real interval to $\R^n$. since its derivative should be $C^1$ too, $\xx$ must be $C^\infty$ to exist.
 
-Our main goal is to speak about stability. For this, we present a brief description of the solution space and explicit forms of its elements. This first section will help us for the second, in the study of the stability.
-\section{Solution Space}
+Our main goal is to investigate stability. For this, we present a brief description of the solution space and explicit forms of its elements. This first section will help us for the second, in the study of the stability.
+\section{Solution space}
 First of all, using results by Cauchy and Picard, and the particular smoothness of $\xx\to A\xx$, we know that the solutions locally exist, and that they are unique for a same initialisation. Since $$\ddt\|\xx\|^2=2\ps{\xx}{\dotxx}=2\ps{\xx}{A\xx}\leq 2\|A\|\|\xx\|^2,$$ 
 $$\|\xx(t)\|^2\leq \|\xx(0)\|^2e^{2\|A\|t} $$
-by Grönwall and solutions cannot explode, they are defined on all $\R$. Solutions are described by a \emph{flow} $\phi:\R^n\times \R\to\R^n$ where $t\mapsto\phi(\xx_0,t)$ is the solution starting in $\xx_0$ at $t=0$. However, existence theorems doesn't tell us much about their actual form. We present then their existence in this particular case.
-First, we observe that the set of solution in a fixed interval is a vector subspace of $C^\infty$. Indeed for all solutions $\xx$, $\yy$ and a scalar $\a$, \[(\a\xx+\yy)'=\a\dotxx + \dot{\yy}=\a A\xx + A\yy=A(\a\xx+\yy)\] and the identical null function is trivially in the space. This motivate us to find a basis of this subspace and understand how to construct it.
+by Grönwall and solutions cannot explode, they are defined on all $\R$. We note that since the derivative of a solution is just itself multiplied by a matrix, it is derivable too, and by induction $\xx$ is $C^\infty$ with $\xx^{(k)}=A^k\xx$. 
+
+The equation is autonomous, so any solution can be reparametrised by a translation of the time:
+If $\dotxx(t)=A\xx(t)$, then $\ddt(\xx(t+\tau))=A\xx(t+\tau)$. That is why we will generally initialise them at $t=0$ without loss of generality. Solutions are described by a \emph{flow} $\phi:\R^n\times \R\to\R^n$ where $t\mapsto\phi(\xx_0,t)$ is the solution starting in $\xx_0$ at $t=0$. However, existence theorems does not tell us much about their actual form. We present then their existence in this particular case.
+First, we observe that the set of solution is a vector subspace of $C^\infty$. Indeed for all solutions $\xx$, $\yy$ and a scalar $\a$, \[(\a\xx+\yy)'=\a\dotxx + \dot{\yy}=\a A\xx + A\yy=A(\a\xx+\yy)\] and the identical null function is trivially in the space. This motivate us to find a basis of this subspace and understand how to construct it.
 \begin{definition}
-    A collection of $k$ solutions $\xx_1,\dots,\xx_k$ on $I$ are said to be \emph{linearly independents} or \emph{independents}, if $\xx_1(t),\dots,\xx_k(t)$ are linearly independents for all $t\in I$.
+    A collection of $k$ solutions $\xx_1,\dots,\xx_k$ on $I$ are said to be \emph{linearly independent} or \emph{independent}, if $\xx_1(t),\dots,\xx_k(t)$ are linearly independents for all $t\in I$.
 \end{definition}
-\begin{lemme}
-A collection $\xx_1,\dots,\xx_k$ on $I$ of solutions are linearly independents if and only if there exists a time $t$ when $\xx_1(t),\dots,\xx_k(t)$ are linearly independents.
+\begin{lemme} \label{lem:indépendance}
+For any scalar $\tau$, a collection $\xx_1,\dots,\xx_k$ of solutions are linearly independents if and only if $\xx_1(\tau),\dots,\xx_k(\tau)$ are linearly independents.
 \end{lemme}
 \begin{proof}
-If the solutions are independent we have the result by definition. In the other way, as $\xx\mapsto A\xx$ is Lipschitz continuous, we have by Picard that the solutions are uniques for a initial point given. Now if at a certain time $\tau$, the positions aren't independent, then we must have non all null scalar $\a_1,\dots,\a_k$ such that  $\a_1\xx_1(\tau) + \dots + \a_k\xx_k(\tau)=0$ but then 0 is a solution starting there and then actually  $\a_1\xx_1(t) + \dots + \a_k\xx_k(t)=0$ for all $t$ in $I$ and .
+If the solutions are independent we have the result by definition. In the other way, by uniqueness of the solutions up to initialisation, we have that if for time $\tau$, the positions are not independent, then we must have non all null scalars $\a_1,\dots,\a_k$ such that  $\a_1\xx_1(\tau) + \dots + \a_k\xx_k(\tau)=0$. But then 0 is a trivial solution starting there and actually  $\a_1\xx_1(t) + \dots + \a_k\xx_k(t)=0$ for all $t$.
 \end{proof}
-This lemma prove that the space of solution has the same dimension as the space $\R^n$, \ie $n$.
+This lemma prove that the space of solution has the same dimension as the space $\R^n$, \ie $n$. 
 In order to manipulate the solutions, we put them in a matrix, like $(\xx_1,\dots,\xx_k)$. In this form we see that we can actually extend the equation to matrix entries: 
 \[\dot{X}=AX\]
 and since 
 \[\dot{X}=(\dotxx_1,\dots,\dotxx_k)  
 \text{ and } 
 AX=(A\xx_1,\dots,A\xx_k),\]
-a matrix X is a solution if and only if its columns are vector solutions. We see that for a vector $v\in\R^k$, $Xv$ is a vector solution $(Xv)' = \dot{X}v = AXv$. This solution ca be written as $Xv = v_1\xx_1 + \dots + v_k\xx_k$ and is then a linear combination of the column solutions of $X$. Thus, a matrix solution allow us to easily write new solutions as linear combinaison of a collection of solutions. As the dimension of the space of solutions is $n$,exactly $n$ linear independents solutions will be enough to construct all solutions as a product of the matrix solution constructed with them.
+a matrix X is a solution if and only if its columns are vector solutions. We see that for a vector $v\in\R^k$, $Xv$ is a vector solution $(Xv)' = \dot{X}v = AXv$. This solution ca be written as $Xv = v_1\xx_1 + \dots + v_k\xx_k$ and is then a linear combination of the column solutions of $X$. Thus, a matrix solution allow us to easily write new solutions as linear combinaison of a collection of solutions. As the dimension of the space of solutions is $n$, exactly $n$ linear independents solutions will be enough to construct all solutions as a product of the matrix solution constructed with them.
 \begin{definition}
-    If a matrix solution $M=(\xx_1,\dots,\xx_n)$ is square(k=n) and of full rank, then it is called a \emph{fundamental matrix solution} and $\{\xx_1,\dots,\xx_k\}$ a \emph{fundamental set of solutions}.
+    If a matrix solution $M=(\xx_1,\dots,\xx_n)$ is square (k=n) and of full rank, then it is called a \emph{fundamental matrix solution} and $\{\xx_1,\dots,\xx_k\}$ a \emph{fundamental set of solutions}.
 \end{definition}
-with such a $M$, $M\R^n$ is the all space of solutions. At a time $t=0$, $M(0)v=v_1\xx_1(0) + \dots + v_k\xx_k(0)$ meaning that with the condition $\xx(0)=x_0$, v must be chosen to be the vector of coordinates of $x_0$ in the basis of the columns of M.
+With such a $M$, $M\R^n$ is the all space of solutions. At time $t=0$, $M(0)v=v_1\xx_1(0) + \dots + v_k\xx_k(0)$ meaning that with the condition $\xx(0)=x_0$, v must be chosen to be the vector of coordinates of $x_0$ in the basis of the columns of M.
 \\ \\
-This done, we can look at the forms the solutions can take. In one dimension, the problem is $\dotx=ax$ and if a is non null, non trivial solutions satisfy $a=(\log|x|)'$ which give $\log|x(t)|=at+c$ and $x(t)=\pm e^{at+c}=x_0e^{at}$. We check easily that $e^{at}$ is indeed a solution. The $n$-dimensional case is more complex. We try to put the equation in its integral form and derive a property by recurrence (supposing $X_0=I$ for simplicity): 
+ We can now look at the forms the solutions can take. In one dimension, the problem is $\dotx=ax$ and if a is non null, non trivial solutions satisfy $a=(\log|x|)'$ which give $\log|x(t)|=at+c$ and $x(t)=\pm e^{at+c}=x_0e^{at}$. We check easily that $e^{at}$ is indeed a solution. The $n$-dimensional case is more complicated. We try to put the equation in its integral form and derive a property by recurrence (supposing $X_0=I$ for simplicity): 
 \begin{IEEEeqnarray*}{rCl}
 X(t) 
 &=& I + \int_0^t AX(s) \dd s 
 = I + \int_0^t A\bigg(I + \int_0^{s_1} AX(s_2) \dd s_2\bigg) \dd s_1
 = I + tA +\int_0^t \int_0^{s_1} A^2X(s_2) \dd s_2 \dd s_1
-\\ &=& I + tA + \frac12(tA)^2 + \int_0^t \int_0^{s_1} \int_0^{s_3} A^3X(s_3) \dd s_2 \dd s_1
+\\ &=& I + tA + \frac12(tA)^2 + \int_0^t \int_0^{s_1} \int_0^{s_3} A^3X(s_3) \dd s_2 \dd s_1.
 \end{IEEEeqnarray*}
 We see the Taylor expansion of $\exp$ appear, as a generalisation to matrices, where we define $A^0=I$ for any matrix $A$. This motivate the following definition:
 \begin{definition}
 If it converges, we define the \emph{exponential} $e^A$ of a square matrix A and the underlying function $\exp$ as the infinite sum 
-\[e^A = \sum_{n=0}^\infty \frac{1}{n!}A^n\]
+\[e^A = \sum_{n=0}^\infty \frac{1}{n!}A^n.\]
 \end{definition}
 \begin{lemme} \label{lem:exp}
-The exponential of a matrix always converge
+The exponential of a matrix always converge.
 \end{lemme}
 \begin{proof}
 We use $\|.\|$ for the operator norm on matrices, keeping in mind that all matricies norms are equivalent. Now we have by basic properties of this norm that 
 \[ \sum_{n=0}^N \|\frac{1}{n!}A^n\| 
 \leq \sum_{n=0}^N \frac{1}{n!}\|A^n\| 
-\leq \sum_{n=0}^N \frac{1}{n!}\|A\|^n \]
-
+\leq \sum_{n=0}^N \frac{1}{n!}\|A\|^n ,\]
 and this is the Taylor finite expansion of $\|A\|$, which converge for all value of $\|A\|$. As a result the sum is absolutely convergent for the operator norm, and then must converge.
 \end{proof}
 \begin{theoreme}
-For a matrix $A$ and a scalar $t$, the quantity $e^{At}$ is differentiable with respect to $t$ and has derivative $\dd/{\dd t} (e^{At}) = Ae^{At}$
+For a matrix $A$ and a scalar $t$, the quantity $e^{At}$ is differentiable with respect to $t$ and has derivative $\dd/{\dd t} (e^{At}) = Ae^{At}$.
 \end{theoreme}
 \begin{proof}
 Each coordinate of the series is actually a convergent Taylor series in t and is then analytic. The theory of analytic functions tell us that they are $C^\infty$ and that we can derive term by term.
@@ -82,7 +84,7 @@ So the initial matrix is non singular, meaning that it will stay along the time 
 
 For matrices that are not in a special form, we cannot directly compute the series of the exponential and then then neither the solutions. Specials forms of matrices whose exponential are commutable are for example the ones where the power of the matrix has a general formula, like diagonal matrices. We know that diagonal matrices are directly related to eigenvalues and eigenvectors. The eigenvector are the directions where the matrix act like in the one dimensional case and as often, it is a way to find similar results in the higher dimensional problems.
 
-Let's investigate what happens in theses directions, and choose a candidate that look like a one dimensional solution,$e^{\l t}v$, for a real eigenvalue $\l$ of the matrix $A$ and the corresponding eigenvector~$\vv$. We compute its derivative and obtain 
+Let us investigate what happens in theses directions, and choose a candidate that look like a one dimensional solution,$e^{\l t}v$, for a real eigenvalue $\l$ of the matrix $A$ and the corresponding eigenvector~$\vv$. We compute its derivative and obtain 
 \[\dd/{\dd t}(e^{\l t}v) =  e^{\l t}\l v = e^{\l t}Av = A(e^{\l t}v).\]
 This give us indeed a non trivial solution since the eigenvector is non null. Theses kind of solutions can be seen in the computation of the exponential when we have a basis of eigenvectors: the matrix $A$ is diagonalisable like $A=PDP^{-1}$ where $D$ is the diagonal matrix of the eigenvalues and P is the non singular matrix formed by the eigenvectors. Then 
 \[ A^n= (PDP^{-1})^n = PDP^{-1}\cdots PDP^{-1} = PD^nP^{-1} \]
@@ -100,15 +102,15 @@ If $\zz=\xx+i\yy$ is a complex solution of real and imaginary parts $\xx$ and $\
 \end{lemme}
 \begin{proof}
 This can be shown by the simple fact that
-\[\dotxx+i\dotyy =\dotzz = A\zz = A\xx+iA\yy \]
-and that the real and respectively imaginary parts must be equals along the equalities, giving us $\dotxx=A\xx$ and $\dotyy=A\yy$ wich is the result.
+\[\dotxx+i\dotyy =\dotzz = A\zz = A\xx+iA\yy. \]
+As A is real, we can directly read the real and imaginary parts as being $A\xx$ and $A\yy$. The real and respectively imaginary parts being the same along equalities implies $\dotxx=A\xx$ and $\dotyy=A\yy$ which is the result.
 \end{proof}
 We must then consider complex solutions obtained by complex eigenvalues too. We sum up the results together in the following theorem.
 \begin{theoreme} \label{th:eigensolutions}
-For a complex eigenvalue $\s=\a+i\b$ of $A$ with eigenvector $w=u+iv$, we have the two independent solutions
+For a complex eigenvalue $\s=\a+i\b$ of $A$ with eigenvector $w=u+iv$, we have the real solutions
 \[e^{\a t}(\cos(\b t)u - \sin(\b t)v)\] 
 \[e^{\a t}(\cos(\b t)v + \sin(\b t)u).\] 
-In particular, if $\s$ is real, this give only one solution $e^{\a t}u.$ 
+They are independent if ad only if $u$ and $v$ are independent. If $\s$ is real, this give only one solution $e^{\a t}u.$
 \end{theoreme}
 \begin{proof}
 First we have that $e^{\s t}w$ is a complex solution, since 
@@ -116,42 +118,43 @@ First we have that $e^{\s t}w$ is a complex solution, since
 Then by \prettyref{lem:complex}, the real and the imaginary parts are real solutions, we compute them by rewriting the complex solution:
 \[e^{\s t}w = e^{\a t}(\cos(\b t) + i\sin(\b t))(u+iv)
 = e^{\a t}(\cos(\b t)u - \sin(\b t)v) + ie^{\a t}(\cos(\b t)v + \sin(\b t)u).\]
-We recognise the resulting solutions in the real and imaginary part. If we evaluate them in t=0, we get respectively $u$ and $v$. To be linearly dependent, $u$ should be proportional to $v$, i.e. $v=au$. But if $v$ isn't null and $\b$ neither, we can evaluate the solutions in $t=\pi/(2\b)$ and we obtain respectively $-e^{\a\pi/(2\b)}v$ and $e^{\a\pi/(2\b)}u$. These two points must be with the same proportion as in $t=0$. This is impossible as it would implies that $u=-av=-u=0$. The two solutions are then independents and the first part of the result is proven. It follow directly by setting $\b=0$ that the solutions is $e^{\a t}(\cos(0)u - \sin(0)v) = e^{\a t}u$ and  $e^{\a t}v$. But since the eigenvalue is real, the eigenvector is real too and $v=0$ letting only one non trivial solution.
+We recognise the resulting solutions in the real and imaginary part. If we evaluate them in t=0, we get respectively $u$ and $v$ so the independence follow by \prettyref{lem:indépendance}. By setting $\b=0$, the solutions are $e^{\a t}(\cos(0)u - \sin(0)v) = e^{\a t}u$ and  $e^{\a t}v$. But since the eigenvalue is real, the eigenvector is real too and $v=0$ letting only one non-trivial solution.
 \end{proof}
 \begin{remarque}
-Note that complex values come by pairs of conjugates, as well as the eigenvectors: \\
+Note that complex values come by pairs of conjugates, as well as the eigenvectors:
 $Aw=\s w$ implies 
-$$A\overline{w} = \overline{A}\overline{w} = \overline{Aw}= \overline{\s w} = \overline{\s}\overline{w}.$$
-However, this doesn't give us a new solution because $$e^{\overline{\s} t}\overline{w}= \overline{e^{\s t}}\overline{w} = \overline{e^{\s t}w}$$
+$$A\overline{w} = \overline{A}\overline{w} = \overline{Aw}= \overline{\s w} = \bar{\s}\bar{w}.$$
+However, this will not give us new real solutions by the method of \prettyref{th:eigensolutions} because $$e^{\overline{\s} t}\overline{w}= \overline{e^{\s t}}\overline{w} = \overline{e^{\s t}w}$$
 has the same real and imaginary part as $e^{\s t}w$ up to the sign. As a result, a complex eigenvalue give two solutions but together with its conjugate, they give us still two solutions, so we can find as many independent solutions as independent eigenvector we find, real or not.
 \end{remarque}
-\quad \\
-Now we have to deal with the case when we don't have a basis of eigenvectors. In this case, some eigenvalue $\l$ with algebraic multiplicity $\m_a$ and a geometric multiplicity
+Now we have to deal with the case when we do not have a basis of eigenvectors. In this case, some eigenvalue $\l$ with algebraic multiplicity $\m_a$ and a geometric multiplicity
 $$\m_g=\dim\ker(A-\l I) < \m_a.$$
 Such an eigenvalue is called \emph{defective}, and the matrix is said \emph{defective} too when it has at least one defective eigenvalue. We use here the concept of generalized eigenvector that come from the result about the Jordan form:
 
 \begin{definition}
-    A vector $\ww$ is a \emph{generalized eigenvector} of rank $m$  of a matrix A and corresponding to an eigenvalue $\l$, if it a vector (complex if $\l$ is complex) that satisfy
+    A vector $\ww$ is a \emph{generalized eigenvector} of rank $m$  of a matrix A and corresponding to an eigenvalue $\l$, if it is a vector (possibly complex if $\l$ is complex) that satisfy
     $$(A-\l I)^m\ww=0 \quad\text{and}\quad (A-\l I)^{m-1}\ww\neq0$$
-    for a $m\in\N^*$.
+    for $m\in\N^*$.
     
     A \emph{canonical} basis of generalised eigenvectors is a basis of generalised eigenvector such that for all generalized eigenvector $\ww$ of rank $m$ that is in the basis, for all $0<j<m$, $(A-\l I)^j\ww$ are generalised eigenvectors of rank $m-j$ with respect to $\l$, and are in the basis too.
 \end{definition}
 
-Note that with $m=1$, a generalised vector is a usual eigenvector.
+\begin{remarque}
+As before, a square matrix powered by 0 is the identity matrix. Note that $(A-\l I)^{m-1}\ww\neq0$ implies that in particular $\ww\neq0$. As a consequence, a generalised eigenvector of rank 1 is a usual eigenvector.\com{crossed out in the review but have not seen why}
+\end{remarque}
     
 \begin{theoreme}
-    There always exist a canonical basis of generalised eigenvectors.
+    A matrix always have a canonical basis of generalised eigenvectors.
 \end{theoreme}
 \begin{proof}
-    See \com{reference}.
+    Linear algebra result, see \com{reference} for a proof.
 \end{proof}
 
 In term of computation, we start from $(A-\l I)\vv=0$ to find the eigenvectors. Then we search for some $\ww$ such that $(A-\l I)\ww=\vv$, assuring that $(A-\l I)^2\ww=(A-\l I)\vv=0$ and hence that $\ww$ is a generalised vector of rank 2. We continue like this making a chain of generalised vectors. Even if we decide to take into account complex vectors
 
-Now we show how this is actually useful, by looking at the solution starting at a generalised eigenvector $\ww$ of rank $m$ with respect to the defective eigenvalue $\l$.
+We show that this basis is useful, if we use its components as initialisation points.
 \begin{theoreme}[General form of the eigensolutions] \label{th:solutiondegeneree}
- For a canonical basis $B$ of generalised eigenvectors, we have a basis of complex solutions with form $e^{t\l}p_\ww(B)$, where $\l$ is the eigenvalue assosiated to a generalised eigenvector $\ww$ of rank $m$ in the basis, and $p_\ww$ is a polynomial in $B[t]$ of degree $m-1$.
+ For a canonical basis $B$ of generalised eigenvectors, we have a basis of complex solutions with form $e^{t\l}p_\ww(B)$, where $\l$ is the eigenvalue associated to a generalised eigenvector $\ww$ of rank $m$ in the basis, and $p_\ww$ is a polynomial of degree $m-1$ with coefficients that are in the eigenspace of $w$ .
 \end{theoreme}
 \begin{proof}
 We see easily that the basic property of the real exponential that changes sum into product is true for the matrices with the condition that they commute. The proof is the same as in the real case as we have already proven absolute convergence. 
@@ -163,7 +166,7 @@ e^{tA}\ww
 = e^{t\l}\sum_{n=0}^\infty \frac{1}{n!}t^n(A-\l I)^n\ww
 = e^{t\l}\sum_{n=0}^{m-1} \frac{1}{n!}t^n\ww_n 
 \end{IEEEeqnarray}
-where the $\ww_n=(A-\l I)^n\ww$ are other generalised vectors in the canonical basis. So have indeed a polynomial in $t$ with generalised eigenvectors coefficients. These are surely independent solutions for different choices of $\ww$ since the generalised eigenvectors are supposed independent and they are the initial values of these solutions, the proof is complete.
+where the $\ww_n=(A-\l I)^n\ww$ are other generalised vectors by definition of the canonical basis. So have indeed a polynomial in $t$ with generalised eigenvectors coefficients. These are surely independent solutions for different choices of $\ww$ since the generalised eigenvectors are supposed independent and they are the initial values of these solutions, the proof is complete.
 \end{proof}
 We have now a complex basis but we know that eigenvalues and eigenvectors come by pairs of conjugates. It is the same for generalised eigenvectors and eigenvalues:
 $$(A-\l I)^m\ww=0 \quad\text{and}\quad (A-\l I)^{m-1}\ww\neq0$$
@@ -180,14 +183,14 @@ $$
     = e^{tA}(\ww-\overline{\ww})
     = 2e^{tA}\Im(\ww).
 $$
-However, we can see that the formulas for the real and the imaginary part aren't very convenient:
+However, we can see that the formulas for the real and the imaginary part are not very convenient:
 \begin{IEEEeqnarray*}{C}
 e^{t\l}\sum_{n=0}^{m-1} \frac{1}{n!}t^n\ww_n \\
 = e^{t\a}(\cos(\b t)+i\sin(\b t))\sum_{n=0}^{m-1} \frac{1}{n!}t^n(\Re\ww_n + i\Im\ww_n) \\
 = e^{t\a}\Big(\cos(\b t)\sum_{n=0}^{m-1} \frac{1}{n!}t^n\Re\ww_n-\sin(\b t)\sum_{n=0}^{m-1} \frac{1}{n!}t^n\Im\ww_n\Big)
 + ie^{t\a}\Big(\cos(\b t)\sum_{n=0}^{m-1} \frac{1}{n!}t^n\Im\ww_n+\sin(\b t)\sum_{n=0}^{m-1} \frac{1}{n!}t^n\Re\ww_n\Big).
 \end{IEEEeqnarray*}
-We know that we have a (complex) basis of the complex space solution. The dimension of the $\C$-vector space $\C^n$ is $n$, and since $\R\subset\C$, all real solutions are included in this description. However, the method of taking the real part of a basis doesn't give us a priori a independent set of real solutions. For this reason, we will stay in the the complex space because it present a good and simple description thanks to its algebraic closure, and we will be able too deduce from the complex case results about what we need for the real case. We state a corollary of the precedent theorem, giving all possible forms that can take the reals solutions, but without giving a explicit formula.
+We know that we have a (complex) basis of the complex space solution. The dimension of the $\C$-vector space $\C^n$ is $n$, and since $\R\subset\C$, all real solutions are included in this description. However, the method of taking the real part of a basis does not give us a priori a independent set of real solutions. For this reason, we will stay in the the complex space because it present a good and simple description thanks to its algebraic closure, and we will be able too deduce from the complex case results about what we need for the real case. We state a corollary of the precedent theorem, giving all possible forms that can take the reals solutions, but without giving a explicit formula.
 \begin{corollaire} \label{cor:formesolutionlineaire}
     All solutions to linear system have coordinates that are linear combinations of the following functions :
     \begin{itemize}
@@ -201,7 +204,7 @@ We know that we have a (complex) basis of the complex space solution. The dimens
     This actually describe the complex space too, since we can rebuild the complex solutions we used to derive this corollary by summing the real part and $i$ times imaginary one.
 \end{remarque}
 \section{Stability}
-In other terms, the \prettyref{th:eigensolutions} tell us that each non null real eigenvalue gives direction(s) where the trajectories are straight and of exponential velocity. Null eigenvalues give direction(s) where trajectories are fixed. Non real eigenvalue gives direction(s) where the trajectories are like ellipses that can change of size exponentially. The \prettyref{th:solutiondegeneree} add other sorts of solutions as polynomials resized by a exponential and correspond to the case of degenerated eigenvalues.
+In other terms, \prettyref{th:eigensolutions} tell us that each non null real eigenvalue gives direction(s) where the trajectories are straight and of exponential velocity. Null eigenvalues give direction(s) where trajectories are fixed. Non real eigenvalue gives direction(s) where the trajectories are like ellipses that can change of size exponentially. The \prettyref{th:solutiondegeneree} add other sorts of solutions as polynomials resized by a exponential and correspond to the case of degenerated eigenvalues.
 
 All these considerations are only on the special directions. Depending on the sign of the real part of the eigenvalues, theses specials solutions go very fast to $0$, stay in an orbit, diverge very fast to infinity values, or maybe follow a polynomial. This motivate us to see how these special solutions act together, and what is the asymptotic comportment of trajectories, how stable is the origin, and make a classification about all theses factors.
 First of all we define concepts about stability, and asymptotic convergence. For this we put our self in a more general cadre which will be useful later, with function $\FF$ and the equation 
@@ -212,10 +215,10 @@ We suppose $\FF$ regular enough to have a flow $\phi(\xx_0,t)$ which encapsulate
 \phi(\xx_0,0) &=& \xx_0
 \end{IEEEeqnarray*}
 \begin{definition}
-    A solution x is \emph{Lyanupov stable} or \emph{L-stable} if the continuity of the flow with respect to the initial condition $\xx_0$ is uniform with respect to positive times $t\geq$. Namely, if for all $\e>0$ there exist a $\d>0$ such that $\|\zz-\xx(0)\|<\d$ implies that for all $t\geq0$, $\|\phi(\zz,t)-\xx(t)\|<\e$.
+    A solution x is \emph{Lyapunov stable} or \emph{L-stable} if the continuity of the flow with respect to the initial condition $\xx_0$ is uniform with respect to positive times $t\geq$. Namely, if for all $\e>0$ there exist a $\d>0$ such that $\|\zz-\xx(0)\|<\d$ implies that for all $t\geq0$, $\|\phi(\zz,t)-\xx(t)\|<\e$.
 \end{definition}
 \begin{definition}
-    Two solutions $\xx$ and $\yy$ are $\omega$\emph{-attracted} to each other if $\lim_{t\to\infty}\|\yy(t)-\xx(t)\| = 0$. The resulting equivalence class is called the \emph{basis of attraction}. A solution $\xx$ is said \emph{$\omega$-attracting} or \emph{attracting} if there is a $\d>0$ such that $\|\zz_0-\xx_0\|<\d$ implies that $\phi(\zz_0,t)$ is in the same basin of attraction of $\xx$. A solution is said \emph{globally $\omega$-attracting} (or \emph{globally attracting}) on a set if this set is in the basin of attraction. We do not need to specify the set if it's the all solution space.
+    Two solutions $\xx$ and $\yy$ are $\omega$\emph{-attracted} to each other if $\lim_{t\to\infty}\|\yy(t)-\xx(t)\| = 0$. The resulting equivalence class is called the \emph{basis of attraction}. A solution $\xx$ is said \emph{$\omega$-attracting} or \emph{attracting} if there is a $\d>0$ such that $\|\zz_0-\xx_0\|<\d$ implies that $\phi(\zz_0,t)$ is in the same basin of attraction of $\xx$. A solution is said \emph{globally $\omega$-attracting} (or \emph{globally attracting}) on a set if this set is in the basin of attraction. We do not need to specify the set if it is the all solution space.
 \end{definition}
 \begin{definition}
     A solution is \emph{asymptotically stable} if it is L-stable and attracting. It is said \emph{globally asymptotically stable} if it is L-stable and globally attracting
@@ -240,13 +243,15 @@ In the linear case, $\phi$ is linear in the first variable, indeed $\phi(\xx_0,t
      The linear system is L-stable if and only if each of its solutions is bounded for positive times.
  \end{theoreme}
  \begin{proof}
-  Suppose the system is L-stable, and for contradiction that a solution $\xx$ is not bounded. Let $\d>0$ be the distance given by the stability, such that all solutions that start with a norm smaller than $\d$ don't go away the unit ball. We can then define an other solution $\yy=\d\xx/\|\xx(0)\|$ and $\|\yy(0)\|=\d$, so $\yy$ wont go away the unit ball and is bounded. This contradict the fact that $\xx$ and $\yy$ are proportionals and all solutions must be bounded.
+  Suppose the system is L-stable, and for contradiction that a solution $\xx$ is not bounded. Let $\d>0$ be the distance given by the stability, such that all solutions that start with a norm smaller than $\d$ do not go away the unit ball. We can then define an other solution $\yy=\d\xx/\|\xx(0)\|$ and $\|\yy(0)\|=\d$, so $\yy$ wont go away the unit ball and is bounded. This contradict the fact that $\xx$ and $\yy$ are proportionals and all solutions must be bounded.
   
   Suppose now that all solutions are bounded. Then the columns of $X=e^{tA}$ the fundamental system are bounded, implying that actually the norm of X is bounded (all norm on finite dimensional spaces are equivalent). Now we get 
   \[ \|\phi(x_0,t)\|=\|X(t)x_0\| 
   \leq \|X(t)\| \|\xx_0\| 
   \leq \max_{t\geq0} \|X(t)\| \|\xx_0\| \]
-  which is smaller than any positive $\e$ as soon as $\|\xx_0\|<\e/\max_{t\geq0} \|X(t)\|$ and give us the stability of the sytem.
+  which is smaller than any positive $\e$ as soon as 
+  $$\|\xx_0\| < \frac{\e}{\max_{t\geq0} \|X(t)\|}$$
+  and give us the stability of the system.
  \end{proof}
 \begin{theoreme}
     The linear system is globally asymptotically stable if and only if it is attracting.
@@ -269,7 +274,7 @@ has $\begin{pmatrix}1\\-1\end{pmatrix}$ in the kernel and this is the first eige
 Similary, 
 $$ A-\l_2I = A-4I= \begin{pmatrix} 3&3\\3&3 \end{pmatrix} $$
 give the eigenvector $\begin{pmatrix}1\\1\end{pmatrix}$ and the unstable eigensolution $e^{4t}\begin{pmatrix}1\\1\end{pmatrix}\xrightarrow[t\to\infty]{\|.\|}~\infty$. We plot the results: \com{graphique + commentaires}
-We see that we have only two straight solutions, the eigensolutions. Their norm evolve exponentially but they are time inverted from each other. All the other solutions are combinations of those two and are hyperbolas, they come near the origin and then goes back away. The only one that goes to zero is the eigensolution with eigenvalue -2. We can be as near to zero as we want for the start, the solution eventually goes to infinity if it's not this eigensolution. We doesn't see any stability, a such system is called a saddle and we will define a general definition for it later.
+We see that we have only two straight solutions, the eigensolutions. Their norm evolve exponentially but they are time inverted from each other. All the other solutions are combinations of those two and are hyperbolas, they come near the origin and then goes back away. The only one that goes to zero is the eigensolution with eigenvalue -2. We can be as near to zero as we want for the start, the solution eventually goes to infinity if it is not this eigensolution. We does not see any stability, a such system is called a saddle and we will define a general definition for it later.
 \end{exemple}
 
 \begin{exemple}[focus]
@@ -293,21 +298,20 @@ $$ \dotzz=
 $$
 The characteristic polynomial is $(-1-\l)(-3-\l)-3=\l(-4-\l)$ and has roots $\l_1=-4$, $\l_2=0$. The eigenvectors are respectively $\begin{pmatrix}1\\1\end{pmatrix}$ and 
 $\begin{pmatrix}3\\-1\end{pmatrix}$. They give the solutions $e^{-4t}\begin{pmatrix}1\\1\end{pmatrix}$ and $\begin{pmatrix}3\\-1\end{pmatrix}$ (constant solution). \com{graphique + commentaires}
-We see that we have a line where the solutions are fixed and a other where the solution goes exponentially to the origin. As a result the system is L-stable because solutions don't go away, but it is not attracting or asymptotically stable because this fixed line contain solutions that never move to the origin.
+We see that we have a line where the solutions are fixed and a other where the solution goes exponentially to the origin. As a result the system is L-stable because solutions do not go away, but it is not attracting or asymptotically stable because this fixed line contain solutions that never move to the origin.
 We plot the results: \com{graphique + commentaires}
 \end{exemple}
-
+These are simple examples where the matrix is diagonalisable. When it is not the case, the situation is more complicated because of the generalised eigenvectors:
 \begin{exemple}[defective eigenvalue]
 Consider the system
 $$ \dotzz=
-\begin{pmatrix} -2&1\\-1&0 \end{pmatrix}\zz =A\zz
+\begin{pmatrix} -2&1\\-1&0 \end{pmatrix}\zz =A\zz.
 $$
-The characteristic polynomial is $(1+\l)^2$ and has one root $\l=-1$, $\l_2=0$.$(A+I)=\begin{pmatrix} -1&1\\-1&1 \end{pmatrix}$ and give the eigenvector $\vv=\begin{pmatrix}1\\1\end{pmatrix}$. It is the only one because $\det \begin{pmatrix} -1&1\\-1&1 \end{pmatrix} =0$ and it must be of rank one. This give us a solutions $e^{-t}\begin{pmatrix}1\\1\end{pmatrix}$. We search for a generalised eigenvector:
+The characteristic polynomial is $(1+\l)^2$ and has one root $\l=-1$, $\l_2=0$; $(A+I)=\begin{pmatrix} -1&1\\-1&1 \end{pmatrix}$ give the eigenvector $\vv=\begin{pmatrix}1\\1\end{pmatrix}$. It is the only one because $\det \begin{pmatrix} -1&1\\-1&1 \end{pmatrix} =0$ and it must be of rank one. This give us a solutions $e^{-t}\begin{pmatrix}1\\1\end{pmatrix}$. We search for a generalised eigenvector:
 $$(A+I)\ww=\vv \text{ , \ie } \begin{pmatrix} -1&1\\-1&1 \end{pmatrix}\ww= \begin{pmatrix}1\\1\end{pmatrix}.$$
-We find $\ww=\begin{pmatrix}0\\1\end{pmatrix}$ and the second solution is $e^{\l t}(\ww+t\vv) = e^{-t}(\begin{pmatrix}0\\1\end{pmatrix}+t\begin{pmatrix}1\\1\end{pmatrix}) = e^{-t}\begin{pmatrix}t\\1+t\end{pmatrix}$
-\com{graphique + commentaires}
+We find $\ww=\begin{pmatrix}0\\1\end{pmatrix}$ and the second solution is $e^{\l t}(\ww+t\vv) = e^{-t}(\begin{pmatrix}0\\1\end{pmatrix}+t\begin{pmatrix}1\\1\end{pmatrix}) = e^{-t}\begin{pmatrix}t\\1+t\end{pmatrix}$.
+\com{graphique}
 \end{exemple}
-These are simple examples where the matrix is diagonalisable. In general, the situation is more complex because of the generalised eigenvectors
 
 \begin{theoreme}
     The linear system is 
@@ -327,36 +331,42 @@ Since a linear combination is a finite sum, the solution is bounded if all these
 For both, if the eigenvalue $\s=\a+i\b$ is non defective, then $j=0$ only and they are bounded if $\a$ is non positive. If $\s$ is defective, $j>0$ and they are bounded if $\a$ is negative because the exponential is $(t^j)$ for all $j$'s. The sytem is now L-stable.
 
 Alternatively, if there exists an eigenvalue $\s=\a+i\b$ with eigenvector $w=u+iv$ that have a positive real part, then by \prettyref{th:eigensolutions}, there exist a solution $e^{\a t}(cos(\b t)u-\sin(\b t)v)$ and its norm $e^{\a t}\|cos(\b t)u-\sin(\b t)v\|$
-is not bounded since $cos(\b t)u-\sin(\b t)v$ doesn't converge to zero. If $\s$ is defective and is purely imaginary, then \prettyref{th:solutiondegeneree} tell us that there exist a solution $p_w(t)$, polynomial of non null degree, and $p_w(t)\to\infty$ when $t\to\infty$ because of the dominant term. There exists solutions that are unbounded , and the system is not L-stable.
+is not bounded since $cos(\b t)u-\sin(\b t)v$ does not converge to zero. If $\s$ is defective and is purely imaginary, then \prettyref{th:solutiondegeneree} tell us that there exist a solution $p_w(t)$, polynomial of non null degree, and $p_w(t)\to\infty$ when $t\to\infty$ because of the dominant term. There exists solutions that are unbounded , and the system is not L-stable.
 
 \item 
 By \prettyref{th:stablecondition}, we just have to show that the conditions on the eigenvalues are equivalent to the fact that the system is attracting.
 
 But following the considerations of the first part, if all eigenvalues have negative real parts, there is always a $e^{\a t}$ with $\a<0$ term in front of the bases solutions and they all converge to zero. The system is attracting, and globally asymptotically stable.
 
-Alternatively if it's not the case and that $\s=\a+i\b$ has a non negative part, we have a solution $e^{\a t}p_w(t)$ that satisfy $\|e^{\a t}p_w(t)\| \geq \|p_w(t)\|$ which doesn't go to zero. The system is not attracting and then not globally asymptotically stable.
+Alternatively if it is not the case and that $\s=\a+i\b$ has a non negative part, we have a solution $e^{\a t}p_w(t)$ that satisfy $\|e^{\a t}p_w(t)\| \geq \|p_w(t)\|$ which does not go to zero. The system is not attracting and then not globally asymptotically stable.
 \end{enumerate}
 \end{proof}
-
-This is the result we wanted in this section. It motivate the categorisation of linear systems, taking into account the nature of their stability.
+\begin{exemple}
+     The second condition of the first point seem to point out a very specific situation. Would the theorem work without this condition, meaning that this situation is algebraically impossible? Indeed, we usually do not often see real matrices with a defective and purely imaginary eigenvalue. This is maybe because the following remarks: it can not be in one dimension because eigenvalues are real; it can not be in two dimension because imaginary eigenvalues come by pair of conjugates and then they would be opposed, hence different and non-defective. To have a purely imaginary eigenvalue of multiplicity two we must have its conjugate of multiplicity two too. So we try in four dimension. We search for a matrix with characteristic polynomial $(\l^2+1)^2$. The basis bloc that introduce $i$ eigenvalue is 
+     $$J=\begin{pmatrix}0&1\\-1&0\end{pmatrix}.$$
+     We could try with diag$(J,J)$, but this gives a non-defective eigenspace. With a little modification on it, we find a matrix that is defective:
+     $$\begin{pmatrix}J&I_2\\0&J\end{pmatrix}.$$
+     It has the only two independent eigenvectors $(\pm i,1,0,0)^\top$. Hence in this pathological situation, the defective eigensolutions are of the form $e^{it}p(t)=(\cos(t)+i\sin(t))p(t)$, which is neither constant, neither exponential, neither cyclic, neither a polynomial, neither bounded.
+\end{exemple}
+This is one of the main results of the section, it presents a complete understanding of the stability. It motivates the categorisation of linear systems, taking into account the nature of their stability.
 \begin{definition}
     For a sytem $\dotxx=A\xx$, we set the following denomination of the matrix $A$.
     \begin{itemize}
     \item \emph{Stable} : all eigenvalues have negative real part. ($i\R+\R^*_-$)
     \item \emph{unstable} : $-A$ is stable. i.e. all eigenvalues have positive real part. ($i\R+\R^*_+$)
-    \item \emph{saddle} : all eigenvalues have a non null real part and they don't all have the same sign.
-    \item \emph{hyperbolic} : stable, unstable or saddle; \ie all eigenvalues have non null real part.
+    \item \emph{saddle} : all eigenvalues have a non null real part and they do not all have the same sign.
+    \item \emph{hyperbolic} : stable, unstable or saddle; \ie all eigenvalues have non null real part. ($i\R+\R^*$)
     \item \emph{center} : all eigenvalues are purely imaginary. ($i\R^*$)
-    \item \emph{elliptic} : all eigenvalues are non null, purely imaginary, and non defective. ($i\R^*$)
-    \item \emph{focus} : all eigenvalues are real, negative, and non defective. ($\R^*_-+i\R$)
-    \item \emph{source} : all eigenvalues are real, positive, and non defective. ($\R^*_++i\R$)
+    \item \emph{elliptic} : all eigenvalues are non null, purely imaginary, and non defective.
+    \item \emph{focus} : all eigenvalues are real, negative, and non defective.
+    \item \emph{source} : all eigenvalues are real, positive, and non defective.
     \item \emph{degenerated} : there exists a defective eigenvalue.
     \end{itemize}
-    More generally, we use these terms to speak about a specific eigenvalue, seeing it as a one-dimensional matrix, meaning that it must respect the generic condition (this doesn't apply to saddle).
+    More generally, we use these terms to speak about a specific eigenvalue, seeing it as a one-dimensional matrix, meaning that it must respect the generic condition (this does not apply to saddle).
 \end{definition}
 \begin{remarque}
     The matrix $A$ is unstable (resp. a focus) if $-A$ is stable (resp. a source).
-    We point out the similarity between the words "L-stabe" and "stable", which speak respectively about Lyanupov stability and eigenvalues, don't confuse them. A stable linear system is L-stable but not 
+    We point out the similarity between the words "L-stabe" and "stable", which speak respectively about Lyapunov stability and eigenvalues, do not confuse them. A stable linear system is L-stable but not 
 \end{remarque}
 \com{graphiques et présentations des structures possibles des solutions}
 \begin{corollaire}
@@ -368,7 +378,7 @@ This is the result we wanted in this section. It motivate the categorisation of 
     \end{itemize} 
 \end{corollaire}
 
-All this classification and considerations on the eigenvalues, show us that there exists directions where the trajectories act kind of exponentially, and these are the directions that are linear combinations of some generalised eigenvectors. We present then a separation of the space of solution, which  tell us where the solutions act like in a stable, unstable, or saddle system.
+All this classification and considerations on the eigenvalues, show us that there exists directions where the trajectories act kind of exponentially, and these are the directions that are linear combinations of some generalised eigenvectors. We present then a separation of the space of solution, which  tell us where the solutions act like in a stable, unstable, or center system.
 \begin{definition}
 For a linear system $\dotxx=A\xx$ of dimension $n$, we define the stable eigenspace, the unstable eigenspace, and the center eigenspace as follows respectively :
 \begin{IEEEeqnarray*}{rCl}
@@ -383,26 +393,26 @@ V^s &=& \{v\in \C^n|\,\exists a,b>0 :\forall t\geq0,\|e^{At}v\| \leq be^{-at}\}
 \\
 V^u &=& \{v\in \C^n|\,\exists a,b>0 :\forall t\leq0, \|e^{At}v\| \leq be^{at}\}
 \\
-V^c &=& \{v\in \C^n|\,\forall a>0,\, e^{At}v e^{-a|t|} \to 0\text{ when }|t|\to\infty\}
+V^c &=& \{v\in \C^n|\,\forall a>0,\, e^{At}v e^{-a|t|} \to 0\text{ when }|t|\to\infty\}.
 \end{IEEEeqnarray*}
 Namely, the spaces where the solutions act exponentially or not.
 \end{definition}
 \begin{remarque}
-We can precise the value of the matrix as an argument when dealing with multiples systems and doesn't use argument when the context is clear. Note that they are all subspaces and $\E^u(A)=\E^s(-A)$ as well as $V^u(A)=V^s(-A)$. Taking $-A$ instead of $A$ correspond actually to inverse time.
+We can precise the value of the matrix as an argument when dealing with multiples systems and does not use argument when the context is clear. Note that they are all subspaces and $\E^u(A)=\E^s(-A)$ as well as $V^u(A)=V^s(-A)$. Taking $-A$ instead of $A$ correspond actually to inverse time.
 \end{remarque}
 
 \begin{lemme}
     For $\s\in\{s,u,c\}$, we have the equalities $\E^\s=V^\s$, the direct sum $\C^n = \E^s\oplus\E^u\oplus\E^c$, and the $\E^\s$ are invariants in the sense that $\phi(\E^\s\times\R)=\E^\s$, \ie all the solutions stay in the space.
 \end{lemme}
 \begin{proof}
-The invariance of the sets comes from the general form of the eigensolutions presented in \prettyref{th:eigensolutions}. Such a solution looks like $e^{\l t}p(t)$, with an eigenvalue $\l$ and a polynomial $p(t)$ whose coefficients are in the generalised eigenspace of $\l$. It's a linear combination of vectors in the same $\E$ for all $t$. The eigensolutions stay then in the space, as well as the span of them, $\E^\s$.
+The invariance of the sets comes from the general form of the eigensolutions presented in \prettyref{th:eigensolutions}. Such a solution looks like $e^{\l t}p(t)$, with an eigenvalue $\l$ and a polynomial $p(t)$ whose coefficients are in the generalised eigenspace of $\l$. It is a linear combination of vectors in the same $\E$ for all $t$. The eigensolutions stay then in the space, as well as the span of them, $\E^\s$.
 \\ \\
 The direct sum come from the fact that eigenspaces associated to different eigenvalues are independents.The three spaces are just a separation of them in three sums. Namely $\E^\s$ is just the direct sum of the generalised eigenspaces associated to eigenvalues of type $\s$.
 \\ \\
 Now we prove the equalities. First, we show $\E^\s\subset V^\s$. Each hyperbolic generalised eigensolution associated to a generalised eigenvector $\ww$, can be written $e^{\d t}p(t)$ for a  polynomial $p$ with complex generalised eigenvector coefficients associated to the same eigenvalue $\d=a+ib$ ($a$,$b$ scalars).
 
 $\E^s$: When $a<0$, we can just bound the norm as 
-$$\|e^{\d t}p(t)\|=e^{at}\|p(t)\| \leq e^{ta/2} \max_{t\geq0}\||p(t)|e^{ta/2}\| $$
+$$\|e^{\d t}p(t)\|=e^{at}\|p(t)\| \leq e^{ta/2} \max_{t\geq0}\||p(t)|e^{ta/2}\| ,$$
 The max exists because the continuous expression $p(t)e^{ta/2}\to 0$ when $t\to\infty$ if $a<0$ (by Taylor expansion or iterating Hospital).
 
 $\E^u$: When $a>0$, we directly obtain the $\E^u(A) = \E^s(-A) \subset V^s(-A) = V^u(A)$ by the remark made above.
@@ -432,11 +442,11 @@ Each vector $v$ of $V^\s$ can be written as a unique sum of vectors of the three
 $$N(v)= \big\|(\|v_s\|,\|v_u\|,\|v_c\|)\big\|_1 = \|v_s\|+\|v_u\|+\|v_c\|.$$ Indeed, absolute homogeneity and positive definiteness are clear, while subadditivity come from the unique decomposition: for vectors $v$ and $w$, we have $v_s+w_s + v_u+w_u + v_c+w_c=v+u$. This implies necessarily that $(u+v)_\s=v_\s + w_\s$, and then
 $$N(v+w) = \|v_s+w_s\|+\|v_u+w_u\|+\|v_c+w_c\| \leq \|v_s\|+\|w_s\|+\|v_u\|+\|w_u\|+\|v_c\|+ \|w_c\|= N(v)+N(w).$$
 Now, $N$ is equivalent to any other norm, \ie we have a constant $c$ such that $c^{-1}\|v\|\leq N(v)\leq c\|v\|$.
-If $\s=s$, $N(e^{At}v)\to0$ exponentially when $t\to\infty$. By looking at the norm $N$, we see that it must be the same for the directions $v_s$, $v_u$ and $v_c$. From the general form of eigensolutions we see that unstable and center eigensolutions doesn't even goes to zero: 
+If $\s=s$, $N(e^{At}v)\to0$ exponentially when $t\to\infty$. By looking at the norm $N$, we see that it must be the same for the directions $v_s$, $v_u$ and $v_c$. From the general form of eigensolutions we see that unstable and center eigensolutions does not even goes to zero: 
 $$\|e^{\d t}p(t)\|
 =\|e^{\Re(\d)t}p(t)\|
 \geq e^{\Re(\d)t}\min\|p\|\geq \min\|p\|>0$$
-Where the min exist and is positive because the polynomial isn't trivial. Then actually $v_u=v_c=0$, and $v = v_s\in \E^s$, so $V^s\subset \E^s$. As before we directly conclude that $$V^u(A)=V^s(-A)\subset \E^s(-A)=\E^u(A).$$ Same kind of argument for a $v=v_s+v_u+v_c\in V^c$: 
+Where the min exist and is positive because the polynomial is not trivial. Then actually $v_u=v_c=0$, and $v = v_s\in \E^s$, so $V^s\subset \E^s$. As before we directly conclude that $$V^u(A)=V^s(-A)\subset \E^s(-A)=\E^u(A).$$ Same kind of argument for a $v=v_s+v_u+v_c\in V^c$: 
 $$e^{-\a|t|}\|e^{\d t}p(t)\|
 =e^{-\a|t|}e^{at}\|p(t)\|
 \geq e^{(at/|t|-\a)|t|}\min\|p\|\geq \min\|p\|>0$$
@@ -459,18 +469,18 @@ This is actually a direct sum because the conjugate invariance of the $\E^\s$'s 
 \end{proof}
 \com{Graphic of a $\R^3$ hyperbolic system with the stability eigenspaces (a plane and a line)}
 \begin{remarque}
-By taking the real part of the spaces (just like the imaginary part) and summing them, we can construct all the real space and the induced real solutions. However, note that taking the real part of a basis wont a priory give a real basis. Indeed the complex basis can use complex coefficient to build all real solutions while a real basis can only use real coefficients and the real part of a product is not just the product of the real parts. 
+By taking the real part of the spaces (just like the imaginary part) and summing them, we can construct all the real space and the induced real solutions. However, note that taking the real part of a basis will not a priory give a real basis. Indeed the complex basis can use complex coefficient to build all real solutions while a real basis can only use real coefficients and the real part of a product is not just the product of the real parts. 
 \end{remarque}
-We see that the eigenspaces seem to act independently from each other and the general comportment of solutions in them, seem to be somewhat uniform. A change of an eigenvalue can change totally the stability of a system; the flow $e^{At}x$ is continuous on $A$, but how does the uniformity continuity change along $t$ and $x$? We can show that actually, in the hyperbolic case, the dimensions of the eigenspaces don't change when we chose a second matrix near enough the first one, in some sense the general stability structure depends continuously on $A$:
+We see that the eigenspaces seem to act independently from each other and the general comportment of solutions in them, seem to be somewhat uniform. A change of an eigenvalue can change totally the stability of a system; the flow $e^{At}x$ is continuous on $A$, but how does the uniformity continuity change along $t$ and $x$? We can show that actually, in the hyperbolic case, the dimensions of the eigenspaces do not change when we chose a second matrix near enough the first one, in some sense the general stability structure depends continuously on $A$:
 
 \begin{theoreme}
 For $\s=s,u$, the map $A\mapsto \text{dim }\E^\s(A)$ is locally continuous on hyperbolic matrices, and so locally constant.
 \end{theoreme}
 \begin{proof}
-We treat only the stable eigenspace since $\text{dim }\E^u(A) =\text{dim }\E^s(-A)$. It's a classical but non trivial analysis result that the roots of a polynomial are continuous, so we prove that if we can find a neighbourhood where the roots stay stable, the structure of the generalised eigenspaces stay the same. Since no eigenvalue is in the imaginary line, we can surround all the stable eigenvalues by a positively oriented simple closed rectifiable curve $\g$, that doesn't cross any eigenvalue, the imaginary line neither. Since the characteristic polynomial $p_A$ vanishes exactly on the eigenvalues, and is holomorphic, we have by the residues that 
+We treat only the stable eigenspace since $\text{dim }\E^u(A) =\text{dim }\E^s(-A)$. It is a classical but non trivial analysis result that the roots of a polynomial are continuous, so we prove that if we can find a neighbourhood where the roots stay stable, the structure of the generalised eigenspaces stay the same. Since no eigenvalue is in the imaginary line, we can surround all the stable eigenvalues by a positively oriented simple closed rectifiable curve $\g$, that does not cross any eigenvalue, the imaginary line neither. Since the characteristic polynomial $p_A$ vanishes exactly on the eigenvalues, and is holomorphic, we have by the residues that 
 $$\frac{1}{2\pi i}\int_{\g} \frac{p_A'}{p_A}
 = \text{dim }\E^s(A) .$$
-Indeed, if $p_A$ has a root $\l$ of order $k$, the residue of $p'_A/p_a$ in $\l$ is just $k$. Since $p_A$ is a polynomial, the order of a zero is just the its multiplicity, and it correspond then to the dimension of the generalised eigenspace of this eigenvalue. The space $\E^\s$ is a direct sum of the generalised eigenspaces of stable eigenvalues, whose dimensions sum up to the dimension of the stable eigenspace itself. Since the coefficients of $p_A$ are polynomials of the coefficients of $A$, they change continuously with $A$. We can suppose that $A$ varies in a small neighbourhood so $p_A$ still don't vanish in the curves $\g$ (that doesn't change with $A$). As a result, the formula is well defined around $A$ and is continuous with respect to $p_A$ and hence to $A$.
+Indeed, if $p_A$ has a root $\l$ of order $k$, the residue of $p'_A/p_a$ in $\l$ is just $k$. Since $p_A$ is a polynomial, the order of a zero is just the its multiplicity, and it correspond then to the dimension of the generalised eigenspace of this eigenvalue. The space $\E^\s$ is a direct sum of the generalised eigenspaces of stable eigenvalues, whose dimensions sum up to the dimension of the stable eigenspace itself. Since the coefficients of $p_A$ are polynomials of the coefficients of $A$, they change continuously with $A$. We can suppose that $A$ varies in a small neighbourhood so $p_A$ still do not vanish in the curves $\g$ (that does not change with $A$). As a result, the formula is well defined around $A$ and is continuous with respect to $p_A$ and hence to $A$.
 \end{proof}
  As we see, the stability structure of the system is the same for matrices in a neighbourhood. But more generally, if two matrices $A$ and $B$ are far from each other, but still have the same dimensions of eigenspaces, do them have similarities? We introduce the following tool of comparison, that match all the trajectories from both system in a continuous way. 
  \begin{definition}
@@ -481,10 +491,10 @@ Indeed, if $p_A$ has a root $\l$ of order $k$, the residue of $p'_A/p_a$ in $\l$
 If a matrix is stable with maximum real part of eigenvalues $-a<0$, there exists a scalar product $\ps{.}{.}_a$ such that $\ps{x}{Ax}_a<-a\|x\|_a^2$.
 \end{lemme}
 \begin{proof}
-See the ref [.]
+Linear algebra result, see \com{ref} for a proof.
 \end{proof}
 \begin{theoreme}[Hartman and Grobman]
-Two stable linear systems on the same space are topologically conjugate.
+Two stable near systems on the same space are topologically conjugate.
 \end{theoreme}
 \begin{proof}
 To find a homeomorphism $h$, we first search one on a subset of the space that content points that are part of all non trivial solutions and then we will extend it along the trajectories. The idea is to find a kind of sphere that trajectories cross only one time. The \prettyref{lem:ps} exhibit a special scalar product that seem to be related to the problem. We consider two matrices $A$, $B$ and their associated linear systems. We set the spheres $S_A$ and $S_B$ associated to the specials products $\ps{}{}_A$, $\ps{}{}_B$ of the matrices $A$ and $B$. We show that trajectories cross them exactly one time by showing that the norm chosen is monotone along the solutions:
@@ -547,7 +557,7 @@ $$S_A \ni \phi(\xx_{k_j},\tau(\xx_{k_j}))
 $$\|h(\xx_k)\|_B 
 = \|e^{-B\tau(\xx_k)}h_0(e^{A\tau(\xx_k)}\xx_k)\|_B 
 \leq \|e^{-B\tau(\xx_k)}\|_B\to 0$$
-because $B$ is stable. Finally, $h$ is continuous in the origin and everywhere and it's a homeomorphism.
+because $B$ is stable. Finally, $h$ is continuous in the origin and everywhere and it is a homeomorphism.
 \end{proof}
 This theorem give us a total correspondence between two flows, and show how the eigenvalues are decisive in the structure of the stability. We can actually show that the unstable and saddle cases have a similar result, built on the theorem. We present a partial proof to see what is going on. 
 \begin{corollaire}
@@ -561,7 +571,7 @@ This theorem give us a total correspondence between two flows, and show how the 
     = e^{Bt}h(\xx)
     = \phi_t\circ h(\xx)
     ,$$
-    so the same $h$ works for the unstable case. We don't prove here the saddle case, but we present a sketch of proof:
+    so the same $h$ works for the unstable case. We do not prove here the saddle case, but we present a sketch of proof:
     When the two matrices are saddle, but with stable eigenspaces of the same dimension $k$ and $m$, we can decompose the space like
     $$\R^n
     = \E^s(A)+\E^u(A) 
@@ -569,8 +579,8 @@ This theorem give us a total correspondence between two flows, and show how the 
     Finite and same dimensional spaces are homeomorphic by a bijective linear map so we can use the theorem in each eigenspace independently as it was $\R^d$ with $d$ the dimension of the stable or unstable eigenspace. We would get two homeomorphism $h_s:\E^s(A)\to\E^s(B)$ and $h_u:\E^u(A)\to\E^u(B)$. To define a $h$ in the all space we can use the projections $\pi_s$ and $\pi_u$ of the decomposition $\R^n
     = \E^s(A)+\E^u(A)$  and we would get something like $h = h_s\circ\pi_s + h_u\circ\pi_u$ that will give us a homeomorphism.
 \end{proof}
-We have studied the stability of linear dynamic system under multiples point of view. Linear system can be though to be a very specific situation. It is indeed. However, we present here a first link to the non-linear case, whose stability appear to be determined in some way by a linear associated system. This motivate the study of linear system and their possible applications to non-linear dynamics.
-\begin{theoreme}[Linearization]
+We have studied the stability of linear dynamical system under multiples point of view. Linear system can be though to be a very specific situation. It is indeed. However, we present here a first link to the non-linear case, whose stability appear to be determined in some way by a linear associated system. This motivate the study of linear system and their possible applications to non-linear dynamics.
+\begin{theoreme}[Linearization, Hartman–Grobman] \label{th:linearisation}
     Consider a system $\dotxx=\FF(\xx)$ such that $\FF$ is derivable, and $\xx^*$ a fixed point. If the linearized system $\dotxx=D\FF(\xx^*)\xx$ is stable, then $\xx^*$ is asymptotically stable for the non linear system.
 \end{theoreme}
 \begin{proof}
@@ -587,8 +597,8 @@ for some function $h(\xx)\to0$ when $\xx\to0$. We use now the special scalar pro
 &=& (2h(x)- a)\|\xx\|_a^2. \\
 &\leq&  -c\|\xx\|_a^2
 \end{IEEEeqnarray*}
-We can take $\|\xx\|$ small enough such that $2h(x)-a$ is negative, let's say for any $a>\e>0$, $\|\xx\|<\d(\e)$ implies $\a=2h(x)-a<-\e$ Then by Grönwall, $\ddt\|\xx\|^2_a<-\a\|\xx\|^2_a$ implies 
+We can take $\|\xx\|$ small enough such that $2h(x)-a$ is negative, let us say for any $a>\e>0$, $\|\xx\|<\d(\e)$ implies $\a=2h(x)-a<-\e$ Then by Grönwall, $\ddt\|\xx\|^2_a<-\a\|\xx\|^2_a$ implies 
 $$\|\xx\|^2_a < \|\xx(0)\|_a^2e^{-\a t}\to0$$
-exponentially when $t\to\infty$ and the system is attracting since it happen in a neighbourhood $B_{\|.\|_a}(0,\d(\e))$ of the origin. Note that taking a neighbourhood small enough, we can attain a exponential convergence of any rate $\a<a$. The L-stability come just from the fact that the convergence of the attractivity is direct and doesn't go out its chosen neighbourhood, namely a sphere for the metric $\|.\|_a$. This give us the asymptotic stability.
+exponentially when $t\to\infty$ and the system is attracting since it happen in a neighbourhood $B_{\|.\|_a}(0,\d(\e))$ of the origin. Note that taking a neighbourhood small enough, we can attain a exponential convergence of any rate $\a<a$. The L-stability come just from the fact that the convergence of the attractivity is direct and does not go out its chosen neighbourhood, namely a sphere for the metric $\|.\|_a$. This give us the asymptotic stability.
 \end{proof}
-The idea behind this proof is that we have defined a quantity, $\|\xx\|_a$, and that we have showed that this quantity was always decreasing along the trajectories, like a potential energy. This kind of function is called a Lyanupov function, we will define it in the next chapter and see that it has nice general applications.
+The idea behind this proof is that we have defined a quantity, $\|\xx\|_a$, and that we have showed that this quantity was always decreasing along the trajectories, like a potential energy. This kind of function is called a Lyapunov function, we will define it in the next chapter and see that it has nice general applications.
