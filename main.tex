@@ -11,8 +11,7 @@
 \usepackage{fancyhdr} %pour les entêtes et pied de page
 %\usepackage[math]{blindtext} % pour le Lorem ipsum
 %\usepackage{enumitem} %pour changer les listes
-\usepackage[a4paper,textwidth=15.5cm]{geometry}
-%\usepackage[framed,numbered]{mcode} %MatLab
+\usepackage[a4paper,textwidth=15.5cm,textheight=22cm]{geometry}
 \usepackage{graphicx} % pour les graphiques
 %\usepackage{subfig} % pour les doubles figures
 \usepackage{float} % pour bien positionner les figures
@@ -21,8 +20,16 @@
 \usepackage{biblatex} % bibliographie
 \usepackage{csquotes} % pour que la biblio s'adapte à la langue
 \usepackage{prettyref}
-\usepackage[hidelinks]{hyperref} % pour les hyperliens et références(mettre en dernier)
-
+\usepackage{hyperref} %pour les hyperliens et références(mettre en dernier)
+\hypersetup{   
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,      
+    urlcolor=blue,
+    citebordercolor= 0 0 0 ,
+    linkcolor=blue ,
+    citecolor = blue }
+\urlstyle{same}
 \newrefformat{fig}{Figure~[\ref{#1}]}
 \newrefformat{it}{question~\ref{#1}.}
 \newrefformat{eq}{(\ref{#1})}
@@ -85,14 +92,17 @@
 \newcommand{\com}[1]{\textcolor{ForestGreen}{[~\emph{#1}~]}}
 
 
+
 \pagestyle{fancy}
-\rhead{Chapter \thechapter}
-\lhead{Stability of linear dynamic systems and Lotka-Volterra equations}
+\lhead{Chapter \thechapter}
+\rhead{Section \thesection}
 \chead{}
 
-\title{\includegraphics[scale=0.15]{images/EPFL-logo.png} \\ Stability of linear dynamical systems and links to Lotka-Volterra equations and epidemics}
+\title{ \includegraphics[scale=0.19]{images/EPFL-logo.png}  \linebreak \linebreak
+\bf{Stability of linear dynamical systems and application to Lotka-Volterra equations and epidemiology}}
 \author{Benoît Müller \\ \\
-Semester project for a bachelor of mathematics \\ in École Polytechnique Fédérale de Lausanne \\ \\
+Bachelor project in mathematics \\ 
+École Polytechnique Fédérale de Lausanne \\ \\
 Supervisor: Joachim Krieger \\
 Co-supervisor: Shengquan Xiang }
 \date{Spring 2021}

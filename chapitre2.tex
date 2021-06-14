@@ -1,8 +1,11 @@
 \chapter{Lotka-Volterra equations and considerations on the affect of each species}
 
-In this chapter, we present a model for the evolution of the population between preys and predators. For each of the predator and the prey population we define a function that quantify the size of the population with respect to time. The goal is to motivate a choice of differential equations that will describe the interaction and give a possible evolution of the two populations. Lotka-Volterra equations are well known equation in mathematical biology. To get straigth to the point, the equations are
-\[\dot{x}=x(\a-\b y) \quad  \dot{y} = y(-\g + \d x).\]
-where $x$ and $y$ represent the size of the population of preys, and predators respectively. The parameters $\a,\b,\g,\d$ are positive scalars. In the first chapter we presented a pragmatic and mathematical analysis of the linear system. Here, we propose first speak about the qualitative understanding of the equation.We will progressively motivate the choice behind this modelisation by showing equations related to it, and then assert a modification on the equations that will give us more possible euquations but still give the same study as Lotka-Volterra.
+In this chapter, we present a model for the evolution of the population between preys and predators. For predator and prey populations, we define a function that quantify the size of the population with respect to time. The goal is to motivate a choice of differential equations that will describe the interaction and give a possible evolution of the two populations. Lotka-Volterra equations are well known equation in mathematical biology. To get straight to the point, the equations are
+$$\begin{cases}
+\dot{x} = x(\a-\b y),\\  
+\dot{y} = y(-\g + \d x).
+\end{cases}$$
+where $x$ and $y$ represent the size of the population of preys, and predators respectively. The parameters $\a,\b,\g,\d$ are positive scalars. In the first chapter we presented a pragmatic and mathematical analysis of the linear systems. Here, we propose first to speak about the qualitative understanding of the equation. We will progressively motivate the choice behind this modelisation by showing equations related to it, and then assert a modification on the equations that will give us more possible equations but for which the same study still works as in the classic system.
 
 \section{Motivation} \label{sec:motiv}
 We go back to the basics and remind that for a function $x$ of one variable $t$, the notations
@@ -13,11 +16,11 @@ If the population is positive,
 \[ \frac{\dot{x}}{x} = \frac{d}{dt}(\log{x}) = c \]
 and then by integrating,
 \[ \log{x(t)} = ct + \log{x(0)}, \]
-giving us $x(t) = x(0)e^{ct}$, the exponential growth. This is quite intuitive, if a population double each step time the general formula is of powers of two, the population wil just grow indefinitely. Alternatively if $c$ is taken negative, it mean we have loss of individuals, and the population decrease.
-
-Obviously this is doesn't encapsulate the reality as the function grow very fast forever. The growth rate must decrease as the population increase. This come from multiple complex reasons such as environment capacities in food, space etc. For now we suppose it is from the simplest form, a linear decrease of this growth rate $\a -\b x$: 
+giving us $x(t) = x(0)e^{ct}$, the exponential growth. This is quite intuitive, if a population double each step time the general formula is of powers of two, the population will just grow indefinitely. Alternatively if $c$ is taken negative, it mean we have loss of individuals, and the population decrease.
+ 
+Obviously, this is doesn't encapsulate the reality as the function grow very fast forever. The growth rate must decrease as the population increase. This come from multiple complex reasons such as competition due to environment capacities in food, space etc. For now we suppose it is from the simplest form, a linear growth rate $\a -\b x$: 
 \[ \dot{x} = x(\a -\b x) .\]
-That gives us the logistic equation, where $\a$ represent the initial growth rate, and $\b$ how fast the growth rate slow down as the population size increase. Here we have one non trivial equilibrium when $\dot{x(t)}=0$ i.e. when $x(t)=\a/\b=x_*$. If not, we remark that $\dotx > 0$ when $ x < x_*$, and  $\dotx < 0$ when $ x < x_*$, meaning that $x_*$ seems stable. indeed we do the computations:
+That gives us the logistic equation, where $\a$ represent the initial growth rate, and $\b$ how fast the growth rate slow down as the population size increase. Here we have one non trivial equilibrium when $\dot{x}(t)=0$ i.e. when $x(t)=\a/\b=x_*$. If not, we remark that $\dotx > 0$ when $ x < x_*$, and  $\dotx < 0$ when $ x < x_*$, meaning that $x_*$ seems stable. Indeed we do the computations and
 \begin{IEEEeqnarray*}{rCl}
    \a = \dotx\frac{x_*}{x(x_*-x)}
    = \frac{\dotx}{x} + \frac{\dotx}{x_* - x}
@@ -28,7 +31,13 @@ By integrating from 0 to t we get
 = \log \frac{x(t)(x_* -x_0)}{x_0(x_*-x(t))} \]
 and rearranging terms
 \[x(t) = \frac{x_0x_*e^{\a t}}{x_* + x_0(e^{\a t}-1)} \]
-which is well defined for $t\in\R$ if $0<x_0<x_*$, and for $t\in[1/\a \log(1 - x_*/x_0),\infty]$ if $0<x_*<x_0$. We see that in both cases $x(t)\to x_*$ as $t\to\infty$.\com{graphique}
+which is well defined for $t\in\R$ if $0<x_0<x_*$, and for $t\in[1/\a \log(1 - x_*/x_0),\infty]$ if $0<x_*<x_0$. We see that in both cases $x(t)\to x_*$ as $t\to\infty$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.2]{images/logistic.png}
+    \caption{Logistic equation for some initialisations, with $x_*=4$ and $\a=1$.}
+    \label{fig:logistic}
+\end{figure}
 
 In conclusion for this logistic growth, the population will always stabilise in the direction of a unique non trivial equilibrium.
 
@@ -56,7 +65,7 @@ The idea is that we want to be able to modify the way the size of the species af
 Here again, $\a,\b,\g,\d$ are positive scalars.
 
 Note that $F(B)$ and other similar forms are an abuse of notation and mean $F\circ B$. When using the dot notation we always mean derivation with respect to time. So if a function has not time as an argument, for example $F$, then
-$\dot{F}(B) = (F\circ B)'$ and $\dot{F}(B(t))= \ddt(F\circ B(t))$.
+$\dot{F}(B) = (F\circ B)'$ and $\dot{F}(B(t))= (F\circ B)'(t)=\ddt(F(B(t)))$.
 
 Let us consider a real case where these considerations are meaningful.
 The paper \cite{Gav} proposes marine phages and bacteria. In this case bacteria doesn't seem to be limited by the environment and their size. We can suppose the affect of itself as negligible against the affect of the phages. With the modification, the effective and the physical size of the phage population are not the same. It seem that one of them quantify as the power p of the other. The reason behind this choice is that in the traditional Lotka-Volterra equations, we assume one predator meets one prey at a time. Here laboratory tests tend to say that the important meetings are when two (or maybe three) phages meet a bacteria.
@@ -73,8 +82,13 @@ Note that if one of the two populations is constant, then the other must be cons
     \dotP = \d G(\P)(-F(B_*) + F(B)).
     \end{cases}
 \end{equation}
-Now we can study the sign of the derivatives $\dotB$ and $\dotP$ and draw a phase plane. The positive values $B_*$ and $\P_*$ divide the positive plane $\R_+^2$ in four regions.
-\com{phase plane}
+Now we can study the sign of the derivatives $\dotB$ and $\dotP$ and draw a phase plane. The positive values $B_*$ and $\P_*$ divide the positive plane $\R_+^2$ in four regions as follow:
+$$\begin{matrix}
+\dotB<0 \text{ and } \dotP<0 
+& \dotB<0 \text{ and } \dotP>0 \\
+\dotB>0 \text{ and } \dotP<0 
+& \dotB>0 \text{ and } \dotP>0 .
+\end{matrix}$$
 Trajectories seem to turn around the center of equilibrium but we cannot see if the solutions are converging to the fixed point, are cyclic, or even diverging. To test this, we compute the linearlized system in purpose to use the \prettyref{th:linearisation} and possibly obtain asymptotic stability. If not we will not be able to conclude for the moment, but this will give a hint to search more.
 \begin{IEEEeqnarray*}{C}
 D_{B,\P} \begin{pmatrix}
@@ -118,8 +132,15 @@ Now we know then that $(B,\P) \in V^{-1}(\{V_0\})$, a closed set as V is continu
 $$\nabla V(B,\P)
 = \big(\d( -\frac{F(B_*)}{F(B)} + 1) , 
 -\b(\frac{G(\P_*)}{G(\P)}-1)\big)^\top.$$
-It never vanishes, except in the equilibrium and is continuous. As a result, the level set doesn't have interior otherwise the function would be constant and the gradient null. Since we have the local unicity of the solution, the level set is actually a closed line, \ie the solutions are in an closed orbit.
-\com{plot $\to$ \url{https://www.desmos.com/calculator/nqxtcrysok}} .
+It never vanishes, except in the equilibrium and is continuous. As a result, the level set doesn't have interior otherwise the function would be constant and the gradient null. Since we have the local unicity of the solution, the level set is actually a closed line, \ie the solutions are in an closed orbit. The following graph shows the trajectory of some solutions, and the direction in each part of the first quadrant:
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.3]{images/LV.png}
+    \caption{Some trajectories of the modified \LV system.\footnotemark}
+    \label{fig:LV}
+\end{figure}
+\footnotetext{Interested readers can find \href{https://www.desmos.com/calculator/xsoo8fqwth}{here} an online interactive graphic that we made for the \LV system, and \href{https://www.desmos.com/calculator/go5ata2oee}{here} a version for the modified system. \\ (The urls are \emph{https://www.desmos.com/calculator/xsoo8fqwth} and \emph{https://www.desmos.com/calculator/go5ata2oee} .)}
+Where we take $F=$Id, $G(\P)=\P^2$, and with a fixed point $(3.04,3.4)$. We see that as the formula of the gradient shows and the system itself, the extrema of $\P$ and $B$ are when the other function is on the equilibrium.
 Now that we know that it's cyclic with a period $\tau$, we derive a modified Volterra principle by integrating these qualities obtained from \prettyref{eq:LV*}:
 \[ \dotB / F(B) = \b (G(\P_*) - G(\P)). \]
 the left side gives
@@ -295,8 +316,7 @@ $$\nabla W(B,\P)=(\d \big(-\frac{F(\Bstar)}{F(B)}+1\big)
 , -\b\big(\frac{G(\Pstar)}{G(\P)}-1\big))^\top$$
 vanishes only in the fixed point, and
 $$H_W(B,\P)=\text{diag}(\d\frac{F(\Bstar)F'(B)}{(F(B))^2} , \b\frac{G(\Pstar)G'(\P)}{(G(\P))^2})$$
-is a diagonal matrix and has its eigenvalues in the diagonal. Because $F$ and $G$ are supposed positive and strictly increasing, the diagonal is strictly since its diagonal is strictly positive and we have supposed not being on the axes. As a result, the hessian is positive definite and $W$ is strictly convex, with a unique minimum on the only stationary point of $W$, the fixed point of the system. The function $W$ is Lyapunov and the fixed point is asymptotically stable. \com{graphic of W as potential energy}
-
+is a diagonal matrix and has its eigenvalues in the diagonal. Because $F$ and $G$ are supposed positive and strictly increasing, the diagonal is strictly since its diagonal is strictly positive and we have supposed not being on the axes. As a result, the hessian is positive definite and $W$ is strictly convex, with a unique minimum on the only stationary point of $W$, the fixed point of the system. The function $W$ is Lyapunov and the fixed point is asymptotically stable.
 For now, we don't know much about the size of the basin of attraction. Actually, in \prettyref{th:Lyapunov}, we have used the neighbourhood of the L-stability only because solutions would be bounded. We would like to prove a global convergence result. First we recall the notion: 
 \begin{definition}
     A fixed point $\xx_*$ of $\bdotx=\mathbf{F}(\mathbf{x})$ is said \emph{globally attractive} on a set $U$, if for all $\mathbf{x_0}\in U$, $\phi(\mathbf{x_0},t) \to \mathbf{x}_*$ as $t \to\infty$. In other words it is attractive without condition on the proximity of the initial point.
